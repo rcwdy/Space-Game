@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://befm3ew2h30wg"]
+
+[ext_resource type="Texture2D" uid="uid://bcidimsd4u7b0" path="res://images/heart.png" id="1_wh0le"]
+[ext_resource type="Texture2D" uid="uid://sk0wtkbcdx6s" path="res://images/light.png" id="2_6cuax"]
+
+[node name="Powerup" type="Area2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wh0le")
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(8, 1, 0, 8, -8, 1, -6, -8, 6, -8)
+
+[node name="Light" type="PointLight2D" parent="."]
+texture = ExtResource("2_6cuax")

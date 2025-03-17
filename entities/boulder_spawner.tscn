@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvtutk5u7lker"]
+
+[ext_resource type="Script" uid="uid://dliyqg5j4jnxf" path="res://entities/boulder_spawner.gd" id="1_daxyu"]
+
+[node name="BoulderSpawner" type="Marker2D"]
+gizmo_extents = 154.1
+script = ExtResource("1_daxyu")
+
+[node name="Spawntimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[connection signal="timeout" from="Spawntimer" to="." method="_on_spawntimer_timeout"]

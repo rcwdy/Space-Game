@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdsbh2hltec8k"]
+
+[ext_resource type="Script" uid="uid://djm0q2eth2uoi" path="res://entities/player.gd" id="1_4awti"]
+[ext_resource type="PackedScene" uid="uid://eum0yktl0uuk" path="res://scenes/health.tscn" id="2_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://bmgqgfo77pbe" path="res://images/fire1.png" id="2_nxc2q"]
+[ext_resource type="PackedScene" uid="uid://7fqis2sr0hwf" path="res://scripts/screenwrap.tscn" id="3_0ife0"]
+[ext_resource type="Texture2D" uid="uid://csbxaord4saju" path="res://images/fire2.png" id="3_vqm7l"]
+[ext_resource type="Texture2D" uid="uid://djsfuvf06dem8" path="res://images/ship2.png" id="4_clki7"]
+[ext_resource type="AudioStream" uid="uid://dh466kpxeyt4l" path="res://audio/Rocket Thrusters-SoundBible.com-1432176431Edit.wav" id="6_cm0fc"]
+
+[sub_resource type="Gradient" id="Gradient_5ct7h"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqlor"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nxc2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vqm7l")
+}],
+"loop": true,
+"name": &"Blast!",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jxqw"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
+radius = 13.0
+height = 28.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_4awti")
+
+[node name="Health" parent="." instance=ExtResource("2_1jxqw")]
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-24, 0)
+rotation = 3.14159
+emitting = false
+amount = 64
+lifetime = 2.0
+emission_shape = 2
+emission_sphere_radius = 8.0
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+color_ramp = SubResource("Gradient_5ct7h")
+
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-16, 0)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_yqlor")
+animation = &"Blast!"
+frame_progress = 0.427162
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("4_clki7")
+
+[node name="Screenwrap" parent="." instance=ExtResource("3_0ife0")]
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1jxqw")
+
+[node name="Collection" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="AreaOfCollectionArea" type="CollisionShape2D" parent="Collection"]
+shape = SubResource("CapsuleShape2D_2hs0m")
+
+[node name="RocketSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cm0fc")
+
+[connection signal="area_entered" from="Collection" to="." method="_on_collection_area_entered"]
+[connection signal="body_entered" from="Collection" to="." method="_on_hitbox_body_entered"]
