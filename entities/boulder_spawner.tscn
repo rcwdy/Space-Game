@@ -7,7 +7,6 @@ gizmo_extents = 154.1
 script = ExtResource("1_daxyu")
 
 [node name="Spawntimer" type="Timer" parent="."]
-wait_time = 0.5
 autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="."]

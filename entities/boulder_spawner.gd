@@ -11,8 +11,6 @@ func _process(delta: float) -> void:
 		$Spawntimer.set_paused(true)
 	else:
 		$Spawntimer.set_paused(false)
-	if(Input.is_action_just_pressed("debug 0")):
-		$Spawntimer.stop()
 
 func _on_spawntimer_timeout() -> void:
 	createBoulder(0)
@@ -20,5 +18,5 @@ func _on_spawntimer_timeout() -> void:
 func createBoulder(instr : int):
 	if(get_child_count() < 16):
 		var boulder_make = boulder.instantiate()
-		add_child(boulder_make)
-		print("Boulder Created @ " + str(boulder_make.position))
+		add_child(boulder_make,1)
+		#print("Boulder Created @ " + str(boulder_make.position))

@@ -4,15 +4,17 @@ var turnSpeed = 0
 var health
 
 var degree = 0 
+var bullet = preload("res://entities/bullet.tscn")
 
 func _ready() -> void:
+	print(DisplayServer.window_get_size().x)
 	$Health.health = 20
 	$Fire.play("Blast!")
 
 func _shoot():
-	var bullet = ColorRect.new()
-	bullet.global_position = position
-	#print(bullet)
+	var shot = bullet.instantiate()
+	add_child(shot)
+	print(str(shot) + "Position: " + str(shot.global_position))
 
 func _process(_delta: float) -> void:
 	health = $Health.health
@@ -20,10 +22,10 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 	updateMoveSpeed()
 	updateTurnSpeed()
-	if(Input.is_action_just_pressed("ui_text_backspace")):
+	if(Input.is_action_just_pressed("Schüt")):
 		_shoot()
 		
-	if(Input.is_action_pressed("ui_left")):
+	if(Input.is_action_pressed("ui_left")): 
 		degree += turnSpeed
 	elif(Input.is_action_pressed("ui_right")):
 		degree += turnSpeed
@@ -86,3 +88,4 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_collection_area_entered(area: Area2D) -> void:
 	print("Good")
+	

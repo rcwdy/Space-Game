@@ -17,5 +17,12 @@ texture = ExtResource("2_dicgi")
 
 [node name="CollisionArea" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xs80f")
+disabled = true
 
 [node name="Health" parent="." instance=ExtResource("3_dgbyp")]
+
+[node name="OnScreenState" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 4.17233e-07)
+scale = Vector2(0.8, 0.8)
+
+[connection signal="screen_exited" from="OnScreenState" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
