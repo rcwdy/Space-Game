@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://lgshbh2kmgc4" path="res://entities/bullet.gd" id="1_opdhh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_opdhh"]
-radius = 2.0
-height = 8.0
+radius = 3.0
+height = 6.0
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 16
@@ -19,5 +19,7 @@ texture = ExtResource("1_j06he")
 shape = SubResource("CapsuleShape2D_opdhh")
 
 [node name="OnScreenState" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.8, 0.8)
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="OnScreenState" to="." method="_on_on_screen_state_screen_exited"]

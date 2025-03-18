@@ -1,8 +1,6 @@
 extends CharacterBody2D
 var speed
 var direction
-var tween = Tween
-#var can_kill = false
 
 func _ready() -> void:
 	$Health.health = 2 
@@ -18,11 +16,18 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	position += speed * Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))
-	move_and_slide()
-		
-
+	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	#if(can_kill):
 	print("dead")
 	queue_free()
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	print(area)
+	if($Health.health > 1):
+		$Health.health -= 1
+		print($Health.health)
+	else:
+		print("Destroyed with bullets!")
+		queue_free()

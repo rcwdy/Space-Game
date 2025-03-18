@@ -12,33 +12,26 @@ func _ready() -> void:
 	$Fire.play("Blast!")
 
 func _shoot():
+	# Creates bullet in front of the ship.
 	var shot = bullet.instantiate()
-	add_child(shot)
-	print(str(shot) + "Position: " + str(shot.global_position))
+	shot.position = $ShootArea.global_position
+	shot.rotation = self.rotation
+	add_sibling(shot)
+	#print(str(shot) + "Position: " + str(shot.global_position))
 
+# Updates ran every frame
 func _process(_delta: float) -> void:
 	health = $Health.health
 	
 	move_and_slide()
 	updateMoveSpeed()
 	updateTurnSpeed()
-	if(Input.is_action_just_pressed("Schüt")):
-		_shoot()
-		
-	if(Input.is_action_pressed("ui_left")): 
-		degree += turnSpeed
-	elif(Input.is_action_pressed("ui_right")):
-		degree += turnSpeed
-	## Update This
-	position += moveSpeed * Vector2(cos(rotation),sin(rotation))
-	moveSpeed = snappedf(moveSpeed, 0.05)
-	turnSpeed = snappedf(turnSpeed, 0.05)
+	updatePlayerAction()
+	updateParticles()
 	
 	rotation_degrees = degree
 	degree = rotation_degrees
-	$FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
-	$FireParticles.set_rotation(degree)
-	#print($FireParticles.direction)
+
 
 func updateMoveSpeed():
 	if(Input.is_action_pressed("ui_up")):
@@ -80,11 +73,26 @@ func updateTurnSpeed():
 			turnSpeed *= 0.2
 		else:
 			turnSpeed *= 0.2
-	
+func updatePlayerAction():
+	if(Input.is_action_just_pressed("Schüt")):
+		_shoot()
+		
+	if(Input.is_action_pressed("ui_left")): 
+		degree += turnSpeed
+	elif(Input.is_action_pressed("ui_right")):
+		degree += turnSpeed
+	## Update This
+	position += moveSpeed * Vector2(cos(rotation),sin(rotation))
+	moveSpeed = snappedf(moveSpeed, 0.05)
+	turnSpeed = snappedf(turnSpeed, 0.05)
+func updateParticles():
+	$FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
+	$FireParticles.set_rotation(degree)
+
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	print("Ouch")
-	$Health.health -= 1
-	body.queue_free()
+	#$Health.health -= 1
+	#body.queue_free()
 
 func _on_collection_area_entered(area: Area2D) -> void:
 	print("Good")

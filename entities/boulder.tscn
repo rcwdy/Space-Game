@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dj4vw527rb4eg"]
+[gd_scene load_steps=6 format=3 uid="uid://dj4vw527rb4eg"]
 
 [ext_resource type="Script" uid="uid://xgmka2ewusth" path="res://entities/boulder.gd" id="1_dgbyp"]
 [ext_resource type="Texture2D" uid="uid://tlcwnk6g15a6" path="res://images/asteroid.bmp" id="2_dicgi"]
 [ext_resource type="PackedScene" uid="uid://eum0yktl0uuk" path="res://scenes/health.tscn" id="3_dgbyp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xs80f"]
-radius = 8.0
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1x2l"]
+radius = 7.0
 
 [node name="Boulder" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_dgbyp")
 
@@ -16,6 +20,7 @@ script = ExtResource("1_dgbyp")
 texture = ExtResource("2_dicgi")
 
 [node name="CollisionArea" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_xs80f")
 disabled = true
 
@@ -25,4 +30,13 @@ disabled = true
 position = Vector2(0, 4.17233e-07)
 scale = Vector2(0.8, 0.8)
 
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_x1x2l")
+
 [connection signal="screen_exited" from="OnScreenState" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
