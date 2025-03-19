@@ -25,3 +25,9 @@ gizmo_extents = 20.0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Health Counter: "
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
