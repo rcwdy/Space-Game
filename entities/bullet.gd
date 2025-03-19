@@ -11,5 +11,6 @@ func _on_on_screen_state_screen_exited() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	print(area)
 	print("hit")
+	print("Baka")
 	queue_free()
 	
