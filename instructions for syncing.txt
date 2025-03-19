@@ -1,0 +1,11 @@
+Before starting you need: Godot (4.4), Visual Studio Code, Latest Git Version (https://git-scm.com/downloads)
+Ask Raj to add you to the github project.
+Download the repository
+Unzip the file to some folder.
+In Godot, import the folder from Windows Explorer
+
+Open up Visual Studio Code
+Install the following extensions:
+godot-tools
+Github Pull Requests
+
