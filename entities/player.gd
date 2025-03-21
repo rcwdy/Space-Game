@@ -1,14 +1,12 @@
 extends CharacterBody2D
 var moveSpeed = 0
 var turnSpeed = 0
-var health
 
 var degree = 0 
 var bullet = preload("res://entities/bullet.tscn")
 
 func _ready() -> void:
 	print(DisplayServer.window_get_size().x)
-	$Health.health = 20
 	$Fire.play("Blast!")
 
 func _shoot():
@@ -21,7 +19,6 @@ func _shoot():
 
 # Updates ran every frame
 func _process(_delta: float) -> void:
-	health = $Health.health
 	
 	move_and_slide()
 	updateMoveSpeed()
@@ -91,7 +88,7 @@ func updateParticles():
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	print("Ouch")
-	#$Health.health -= 1
+	Globals.loseHealth(1)
 	#body.queue_free()
 
 func _on_collection_area_entered(area: Area2D) -> void:

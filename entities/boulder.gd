@@ -29,5 +29,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		$Health.health -= 1
 		print($Health.health)
 	else:
+		Globals.gainPoints(200)
+		Globals.enemy_kills += 1
 		print("Destroyed with bullets!")
 		queue_free()
