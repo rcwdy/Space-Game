@@ -31,9 +31,3 @@ offset_top = 32.0
 offset_right = 43.0
 offset_bottom = 55.0
 text = "Score"
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
