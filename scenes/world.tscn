@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://dyyds63py6fje" path="res://scenes/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://uw8mao5aqxbf" path="res://images/SPACE.png" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cdsbh2hltec8k" path="res://entities/player.tscn" id="3_i7141"]
-[ext_resource type="PackedScene" uid="uid://bvtutk5u7lker" path="res://entities/boulder_spawner.tscn" id="5_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://cxb5cj6r11f41" path="res://entities/enemyCornerSpawner.tscn" id="4_k0juu"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_71j4m")
+metadata/_edit_lock_ = true
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
@@ -17,14 +18,13 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="." instance=ExtResource("3_i7141")]
 position = Vector2(320, 384)
 
-[node name="BoulderSpawner" parent="." instance=ExtResource("5_7r4gi")]
-position = Vector2(320, 256)
-gizmo_extents = 20.0
+[node name="Enemies" parent="." instance=ExtResource("4_k0juu")]
 
-[node name="Health Placeholder" type="Label" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 23.0
-text = "Health Counter: "
+offset_bottom = 40.0
 
 [node name="Score Placeholder" type="Label" parent="."]
 offset_top = 32.0
@@ -32,8 +32,7 @@ offset_right = 43.0
 offset_bottom = 55.0
 text = "Score"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Health Placeholder" type="Label" parent="."]
+offset_right = 127.0
+offset_bottom = 23.0
+text = "Health Counter: "

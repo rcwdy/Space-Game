@@ -18,7 +18,7 @@ func _on_spawntimer_timeout() -> void:
 	createBoulder(0)
 	
 func createBoulder(instr : int):
-	if(get_child_count() < 16):
+	if(get_child_count() < 8):
 		var boulder_make = boulder.instantiate()
 		add_child(boulder_make,1)
 		#print("Boulder Created @ " + str(boulder_make.position))

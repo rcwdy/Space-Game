@@ -1,6 +1,8 @@
 extends CharacterBody2D
 var moveSpeed = 0
+var maxMoveSpeed = 5
 var turnSpeed = 0
+
 
 var degree = 0 
 var bullet = preload("res://entities/bullet.tscn")
@@ -31,10 +33,10 @@ func _process(_delta: float) -> void:
 
 
 func updateMoveSpeed():
-	if(Input.is_action_pressed("ui_up")):
-		if(moveSpeed < 5):
+	if(Input.is_action_pressed("Up")):
+		if(moveSpeed < maxMoveSpeed):
 			moveSpeed += 0.1
-	elif(Input.is_action_pressed("ui_down")):
+	elif(Input.is_action_pressed("Down")):
 		if(moveSpeed > 0):
 			moveSpeed -= 0.2
 		elif(moveSpeed > -2):
@@ -46,21 +48,21 @@ func updateMoveSpeed():
 			moveSpeed -= 0.125
 		else:
 			moveSpeed += 0.125
-	if(moveSpeed >= 5):
+	if(moveSpeed >= maxMoveSpeed):
 		$Fire.show()
 		$FireParticles.emitting = true
 		if(!$RocketSound.is_playing()):
-			print("Hello")
+			print("Fast")
 			$RocketSound.play()
 	else:
 		$Fire.hide()
 		$FireParticles.emitting = false
 		$RocketSound.stop()
 func updateTurnSpeed():
-	if(Input.is_action_pressed("ui_right")):
+	if(Input.is_action_pressed("Right")):
 		if(turnSpeed < 5):
 			turnSpeed += 0.25
-	elif(Input.is_action_pressed("ui_left")):
+	elif(Input.is_action_pressed("Left")):
 		if(turnSpeed > -5):
 			turnSpeed -= 0.25
 	else:
@@ -74,9 +76,9 @@ func updatePlayerAction():
 	if(Input.is_action_just_pressed("Schüt")):
 		_shoot()
 		
-	if(Input.is_action_pressed("ui_left")): 
+	if(Input.is_action_pressed("Left")): 
 		degree += turnSpeed
-	elif(Input.is_action_pressed("ui_right")):
+	elif(Input.is_action_pressed("Right")):
 		degree += turnSpeed
 	## Update This
 	position += moveSpeed * Vector2(cos(rotation),sin(rotation))
@@ -86,11 +88,11 @@ func updateParticles():
 	$FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
 	$FireParticles.set_rotation(degree)
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_hitbox_body_entered(_body: Node2D) -> void:
 	print("Ouch")
 	Globals.loseHealth(1)
 	#body.queue_free()
 
-func _on_collection_area_entered(area: Area2D) -> void:
+func _on_collection_area_entered(_area: Area2D) -> void:
 	print("Good")
 	

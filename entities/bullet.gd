@@ -1,6 +1,6 @@
 extends Area2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position += 5 * Vector2(cos(rotation),sin(rotation))
 
 func _on_on_screen_state_screen_exited() -> void:
