@@ -5,6 +5,8 @@ var player_score
 var high_score
 var enemy_kills
 
+var screenRes = DisplayServer.window_get_size()
+
 var no_data = true
 # When no data is detected 
 func _ready() -> void:

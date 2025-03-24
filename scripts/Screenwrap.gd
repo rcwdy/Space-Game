@@ -9,16 +9,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if($"..".position.x >= DisplayServer.window_get_size().x + _get_image_size().x):
+	
+	if($"..".position.x >= Globals.screenRes.x + _get_image_size().x):
 		$"..".position.x = -_get_image_size().x/2
 	if($"..".position.x <= -20 - _get_image_size().x):
-		$"..".position.x = DisplayServer.window_get_size().x + _get_image_size().x/2
+		$"..".position.x = Globals.screenRes.x + _get_image_size().x/2
 		
-	if($"..".position.y >= DisplayServer.window_get_size().y + _get_image_size().y):
+	if($"..".position.y >= Globals.screenRes.y + _get_image_size().y):
 		$"..".position.y = -_get_image_size().y/2
 		
 	if($"..".position.y <= -20 - _get_image_size().y):
-		$"..".position.y = DisplayServer.window_get_size().y + _get_image_size().y/2
+		$"..".position.y = Globals.screenRes.y + _get_image_size().y/2
 		
 	
 func _get_image_size() -> Vector2:
