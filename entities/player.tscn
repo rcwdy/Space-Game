@@ -51,8 +51,13 @@ spread = 15.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 40.0
+scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_5ct7h")
 metadata/_edit_lock_ = true
+
+[node name="ShotParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(16, 0)
 
 [node name="Fire" type="AnimatedSprite2D" parent="."]
 visible = false
