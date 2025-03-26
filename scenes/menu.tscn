@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duphe2ikm2c0p"]
 
-[ext_resource type="Script" uid="uid://b1hbs4e6s0u42" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://cvejwnet70flr" path="res://scenes/menu.gd" id="1_yqeox"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -14,7 +14,7 @@ grow_vertical = 2
 pivot_offset = Vector2(-51, -1)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_lti8b")
+script = ExtResource("1_yqeox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -57,4 +57,5 @@ focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

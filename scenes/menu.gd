@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	pass
+	$VBoxContainer/StartButton.grab_focus()
 #Add scene change 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
