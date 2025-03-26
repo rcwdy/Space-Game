@@ -8,7 +8,7 @@ var degree = 0
 var bullet = preload("res://entities/bullet.tscn")
 
 func _ready() -> void:
-	print(DisplayServer.window_get_size().x)
+	#print(DisplayServer.window_get_size().x)
 	$Fire.play("Blast!")
 
 func _shoot():
@@ -50,13 +50,13 @@ func updateMoveSpeed():
 			moveSpeed += 0.125
 	if(moveSpeed >= maxMoveSpeed):
 		$Fire.show()
-		$FireParticles.emitting = true
+		$Particles/FireParticles.emitting = true
 		if(!$RocketSound.is_playing()):
 			print("Fast")
 			$RocketSound.play()
 	else:
 		$Fire.hide()
-		$FireParticles.emitting = false
+		$Particles/FireParticles.emitting = false
 		$RocketSound.stop()
 func updateTurnSpeed():
 	if(Input.is_action_pressed("Right")):
@@ -85,8 +85,8 @@ func updatePlayerAction():
 	moveSpeed = snappedf(moveSpeed, 0.05)
 	turnSpeed = snappedf(turnSpeed, 0.05)
 func updateParticles():
-	$FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
-	$FireParticles.set_rotation(degree)
+	$Particles/FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
+	$Particles/FireParticles.set_rotation(degree)
 
 func _on_hitbox_body_entered(_body: Node2D) -> void:
 	print("Ouch")

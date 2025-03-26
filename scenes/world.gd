@@ -1,5 +1,6 @@
 extends Node2D
 var time = 0
+var alive = true
 
 func _process(_delta: float) -> void:
 	$"Health Placeholder".text = "Health:" +str(Globals.player_health)
