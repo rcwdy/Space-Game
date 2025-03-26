@@ -1,14 +1,30 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcqxdgag8qnm2"]
 
 [ext_resource type="Script" uid="uid://bq13ooruivtys" path="res://scenes/settings.gd" id="1_aq7p1"]
-[ext_resource type="Shader" uid="uid://bkjlieg3ybqqe" path="res://scenes/pause.gdshader" id="2_6eyaj"]
+
+[sub_resource type="Shader" id="Shader_f1d2v"]
+code = "shader_type canvas_item;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+uniform float lod: hint_range(0.0, 5) = 0.0;
+
+void fragment() {
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8u653"]
-shader = ExtResource("2_6eyaj")
+shader = SubResource("Shader_f1d2v")
 shader_parameter/lod = 0.0
 
 [sub_resource type="Animation" id="Animation_jg8ls"]
-length = 0.001
+length = 0.15
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
