@@ -43,12 +43,6 @@ offset_bottom = 40.0
 
 [node name="Pause" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
 
-[node name="Score Placeholder" type="Label" parent="."]
-offset_top = 32.0
-offset_right = 43.0
-offset_bottom = 55.0
-text = "Score"
-
 [node name="Health Placeholder" type="Label" parent="."]
 offset_right = 127.0
 offset_bottom = 23.0
