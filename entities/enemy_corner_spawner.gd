@@ -1,12 +1,17 @@
 extends Node2D
 var direction = 8
 var boulder_make = preload("res://entities/boulder.tscn")
+var can_produce = false
 
 enum{
 	NORTHWEST, NORTH, NORTHEAST,WEST,EAST,SOUTHWEST,SOUTH,SOUTHEAST
 }
 
 func _ready() ->void:
+	var parent = get_parent()
+	if("time" in parent && parent.has_node("Enemies")):
+		can_produce = true
+	
 	print($Locations.get_child(4))
 	print(rad_to_deg($Center.get_angle_to($Locations/Northwest.global_position)))
 	print(rad_to_deg($Center.get_angle_to($Locations/North.global_position)))
@@ -14,10 +19,11 @@ func _ready() ->void:
 	print(rad_to_deg($Center.get_angle_to($Locations/South.global_position)))
 
 func _on_spawn_timer_timeout() -> void:
-	direction = randi_range(0,$Locations.get_child_count() - 1)
-	#direction = randi_range(0,3)
-	print(direction)
-	spawn(direction)
+	if(can_produce):
+		direction = randi_range(0,$Locations.get_child_count() - 1)
+		#direction = randi_range(0,3)
+		print(direction)
+		spawn(direction)
 
 func cardinal(value: int) -> String:
 	match(value):
@@ -40,7 +46,8 @@ func cardinal(value: int) -> String:
 	return 'ERROR'
 
 func spawn(value: int) -> void:
-	if($Enemies.get_child_count() < 16):
+	
+	if(can_produce && $Enemies.get_child_count() < 16):
 		var boulder = boulder_make.instantiate()
 		var side = randi_range(0,1)
 		print("Side" + str(side))

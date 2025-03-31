@@ -95,5 +95,12 @@ metadata/_edit_lock_ = true
 stream = ExtResource("6_cm0fc")
 volume_db = -10.0
 
+[node name="DashAttackCD" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="ShootCD" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Collection" to="." method="_on_collection_area_entered"]
 [connection signal="body_entered" from="Collection" to="." method="_on_hitbox_body_entered"]

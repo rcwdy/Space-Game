@@ -6,3 +6,6 @@ func _process(_delta: float) -> void:
 	time += _delta
 	$"Timer Placeholder".text = str(int(time))
 	$"Score Placeholder".text = "Score:" + str(Globals.player_score)
+	
+	if(Input.is_action_just_pressed("Increase 60 seconds")):
+		time += 60
