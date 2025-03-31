@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcqxdgag8qnm2"]
 
-[ext_resource type="Script" uid="uid://bq13ooruivtys" path="res://scenes/settings.gd" id="1_aq7p1"]
+[ext_resource type="Script" uid="uid://bq13ooruivtys" path="res://scenes/pause.gd" id="1_aq7p1"]
 
 [sub_resource type="Shader" id="Shader_f1d2v"]
 code = "shader_type canvas_item;
@@ -121,6 +121,10 @@ text = "Resume"
 layout_mode = 2
 text = "Restart"
 
+[node name="ReturnButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Menu"
+
 [node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
@@ -132,4 +136,5 @@ libraries = {
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

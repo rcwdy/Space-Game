@@ -30,3 +30,7 @@ func _on_quit_button_pressed() -> void:
 
 func _process(_delta):
 	testEsc()
+
+func _on_return_button_pressed() -> void:
+	resume()
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
