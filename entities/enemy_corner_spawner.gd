@@ -9,7 +9,7 @@ enum{
 
 func _ready() ->void:
 	var parent = get_parent()
-	if("time" in parent && parent.has_node("Enemies")):
+	if(("time" in parent && parent.has_node("Player"))):
 		can_produce = true
 	
 	print($Locations.get_child(4))
@@ -17,6 +17,9 @@ func _ready() ->void:
 	print(rad_to_deg($Center.get_angle_to($Locations/North.global_position)))
 	print(rad_to_deg($Center.get_angle_to($Locations/Northeast.global_position)))
 	print(rad_to_deg($Center.get_angle_to($Locations/South.global_position)))
+
+func waveIncrease()->void:
+	Globals.waveIncrease()
 
 func _on_spawn_timer_timeout() -> void:
 	if(can_produce):

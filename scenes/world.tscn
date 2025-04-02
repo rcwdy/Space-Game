@@ -33,6 +33,11 @@ offset_bottom = 479.0
 text = "Score:"
 horizontal_alignment = 2
 
+[node name="Health Placeholder" type="Label" parent="."]
+offset_right = 127.0
+offset_bottom = 23.0
+text = "Health Counter: "
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -42,8 +47,3 @@ offset_bottom = 40.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Pause" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
-
-[node name="Health Placeholder" type="Label" parent="."]
-offset_right = 127.0
-offset_bottom = 23.0
-text = "Health Counter: "

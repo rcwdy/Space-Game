@@ -118,3 +118,8 @@ func toggleDashAttack() -> void:
 
 func toggleAutoFire() -> void:
 	autofire = !autofire
+
+func waveIncrease() -> void:
+	enemySpeed *= 1.2
+	enemySpawnSpeed /= 1 + (enemySpawnMax / enemySpawnMax + 2)
+	enemySpawnMax += 2

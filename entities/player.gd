@@ -55,6 +55,7 @@ func _process(_delta: float) -> void:
 	degree = rotation_degrees
 	$ShootCD.wait_time = Globals.playerShootSpeed
 
+
 func updateMoveSpeed():
 	if(Input.is_action_pressed("Up")):
 		if(moveSpeed < maxMoveSpeed):
