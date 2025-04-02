@@ -9,12 +9,13 @@
 [node name="World" type="Node2D"]
 script = ExtResource("1_71j4m")
 metadata/_edit_lock_ = true
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [480.0]
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
 offset_bottom = 480.0
 texture = ExtResource("2_qfnet")
-metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_i7141")]
 position = Vector2(320, 384)
@@ -47,3 +48,10 @@ offset_bottom = 40.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Pause" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
+offset_left = 3.0
+offset_right = 3.0
+
+[node name="Health Placeholder" type="Label" parent="."]
+offset_right = 127.0
+offset_bottom = 23.0
+text = "Health Counter: "

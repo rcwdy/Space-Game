@@ -1,0 +1,19 @@
+Upgrade Ideas:
+
+Faster Bullets - Integer
+More Bullets - Integer
+Homing Bullets - Binary
+Bigger Bullets - Integer (limited)
+Stronger Bullets - Integer
+Mouse-Aimed Bullets - Binary
+Wave Bullets - Binary
+Max Speed Contact Damage - Integer
+Auto-Fire - Binary
+
+Health Increase - Integer
+Armor Increase - Integer
+Rockets - Integer
+Screen Nukes 
+
+Greater Acceleration/Deceleration
+

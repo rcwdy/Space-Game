@@ -15,7 +15,7 @@ func _ready() -> void:
 	#direction = randi_range(0,360)
 	$CollisionArea.disabled = false
 	#print("Name:" + str(self) + str(Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))))
-	
+
 func _process(_delta: float) -> void:
 	if(can_move):
 		position += speed * Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))
@@ -23,8 +23,6 @@ func _process(_delta: float) -> void:
 	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	#if(can_kill):
-	#print("dead")
 	queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -37,5 +35,4 @@ func dead():
 		Globals.gainPoints(200)
 		Globals.enemy_kills += 1
 		print("Destroyed with bullets!")
-		#can_move = false
 		queue_free()

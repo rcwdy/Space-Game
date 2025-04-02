@@ -1,5 +1,12 @@
 extends Node
 
+# UPGRADES
+enum{
+	BULLET_SPEED_MULTIPLIER = 0, BULLET_SIZE_MULTIPLIER = 1, DOUBLE_BULLET = 15, AIMED_BULLET = 16
+}
+var upgrades = [0, 0]
+var debug_upgrade_num = 0
+
 var player_health
 var player_score
 var high_score

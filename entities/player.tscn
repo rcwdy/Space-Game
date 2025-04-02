@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdsbh2hltec8k"]
+[gd_scene load_steps=11 format=3 uid="uid://cdsbh2hltec8k"]
 
 [ext_resource type="Script" uid="uid://djm0q2eth2uoi" path="res://entities/player.gd" id="1_4awti"]
-[ext_resource type="PackedScene" uid="uid://eum0yktl0uuk" path="res://scenes/health.tscn" id="2_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://bmgqgfo77pbe" path="res://images/fire1.png" id="2_nxc2q"]
 [ext_resource type="PackedScene" uid="uid://7fqis2sr0hwf" path="res://scripts/screenwrap.tscn" id="3_0ife0"]
 [ext_resource type="Texture2D" uid="uid://csbxaord4saju" path="res://images/fire2.png" id="3_vqm7l"]
@@ -37,9 +36,9 @@ collision_mask = 38
 motion_mode = 1
 script = ExtResource("1_4awti")
 
-[node name="Health" parent="." instance=ExtResource("2_1jxqw")]
+[node name="Particles" type="Node2D" parent="."]
 
-[node name="FireParticles" type="CPUParticles2D" parent="."]
+[node name="FireParticles" type="CPUParticles2D" parent="Particles"]
 position = Vector2(-24, 0)
 rotation = 3.14159
 emitting = false
@@ -55,12 +54,14 @@ scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_5ct7h")
 metadata/_edit_lock_ = true
 
-[node name="ShotParticles2D" type="CPUParticles2D" parent="."]
+[node name="ShotParticles" type="CPUParticles2D" parent="Particles"]
 visible = false
 position = Vector2(16, 0)
 
+[node name="Screenwrap" parent="." instance=ExtResource("3_0ife0")]
+metadata/_edit_lock_ = true
+
 [node name="Fire" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(-16, 0)
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_yqlor")
@@ -71,9 +72,6 @@ metadata/_edit_lock_ = true
 [node name="Sprite" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("4_clki7")
-metadata/_edit_lock_ = true
-
-[node name="Screenwrap" parent="." instance=ExtResource("3_0ife0")]
 metadata/_edit_lock_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -90,6 +88,8 @@ metadata/_edit_lock_ = true
 [node name="AreaOfCollectionArea" type="CollisionShape2D" parent="Collection"]
 shape = SubResource("CapsuleShape2D_2hs0m")
 metadata/_edit_lock_ = true
+
+[node name="Bullets" type="Node2D" parent="."]
 
 [node name="RocketSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_cm0fc")

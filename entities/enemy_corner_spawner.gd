@@ -57,51 +57,51 @@ func spawn(value: int) -> void:
 		match(value):
 			NORTHWEST:
 				if(side):
-					boulder.position.x = randf_range(0,160)
+					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
 					boulder.position.y = 0
 				else:
 					boulder.position.x = 0
-					boulder.position.y = randf_range(0,120)
+					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
 				boulder.direction = randi_range(5,85)
 			NORTH:
-					boulder.position.x = randf_range(160,480)
+					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
 					boulder.position.y = 0
 					boulder.direction = randi_range(10,170)
 			NORTHEAST:
 				if(side):
-					boulder.position.x = randf_range(480,640)
+					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4,Globals.screenRes.x)
 					boulder.position.y = 0
 				else:
 					boulder.position.x = 0
-					boulder.position.y = randf_range(0,120)
+					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
 				boulder.direction = randi_range(95,175)
 			WEST:
 					boulder.position.x = 0
-					boulder.position.y = randf_range(120,360)
+					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
 					boulder.direction = randi_range(-85,85)
 			EAST:
-					boulder.position.x = 640
-					boulder.position.y = randf_range(120,360)
+					boulder.position.x = Globals.screenRes.x
+					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
 					boulder.direction = randi_range(90,270)
 			SOUTHWEST:
 				if(side):
-					boulder.position.x = randf_range(0,160)
-					boulder.position.y = 480
+					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
+					boulder.position.y = Globals.screenRes.y
 				else:
 					boulder.position.x = 0
-					boulder.position.y = randf_range(360,480)
+					boulder.position.y = randf_range(3 * Globals.screenRes.y / 4,Globals.screenRes.y)
 				boulder.direction = randi_range(-5,-85)
 			SOUTH:
-					boulder.position.x = randf_range(160,480)
-					boulder.position.y = 640
+					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
+					boulder.position.y = Globals.screenRes.y
 					boulder.direction = randi_range(-10,-170)
 			SOUTHEAST:
 				if(side):
-					boulder.position.x = randf_range(480,640)
-					boulder.position.y = 480
+					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4, Globals.screenRes.x)
+					boulder.position.y = Globals.screenRes.y
 				else:
-					boulder.position.x = 640
-					boulder.position.y = randf_range(360,480)
+					boulder.position.x = Globals.screenRes.x
+					boulder.position.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
 				boulder.direction = randi_range(185,265)
 		print(boulder.direction)
 		$Enemies.add_child(boulder,true)

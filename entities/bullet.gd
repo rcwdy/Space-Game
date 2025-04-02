@@ -10,13 +10,10 @@ func _process(_delta: float) -> void:
 	position += Globals.playerBulletSpeed * Globals.playerBulletSpeedMulti * Vector2(cos(rotation),sin(rotation))
 
 func _on_on_screen_state_screen_exited() -> void:
-	#print("bullet gone")
+	print("bullet gone")
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
-	#print(area)
-	#print("hit")
-	#print("Baka")
 	queue_free()
 
 func _track(area: Area2D):
