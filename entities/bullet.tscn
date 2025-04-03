@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd8frokljs63f"]
+[gd_scene load_steps=5 format=3 uid="uid://bd8frokljs63f"]
 
 [ext_resource type="Texture2D" uid="uid://drcbiuep2kc1g" path="res://in_progress/art/bullet_wip.bmp" id="1_j06he"]
 [ext_resource type="Script" uid="uid://lgshbh2kmgc4" path="res://entities/bullet.gd" id="1_opdhh"]
@@ -6,6 +6,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_opdhh"]
 radius = 3.0
 height = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a2iae"]
+radius = 20.0
+height = 80.0
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 16
@@ -21,5 +25,18 @@ shape = SubResource("CapsuleShape2D_opdhh")
 [node name="OnScreenState" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(0.8, 0.8)
 
+[node name="Homing Area" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="Area" type="CollisionShape2D" parent="Homing Area"]
+position = Vector2(40, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a2iae")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="OnScreenState" to="." method="_on_on_screen_state_screen_exited"]
+[connection signal="area_entered" from="Homing Area" to="." method="_on_homing_area_area_entered"]
+[connection signal="area_exited" from="Homing Area" to="." method="_on_homing_area_area_exited"]

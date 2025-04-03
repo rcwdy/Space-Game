@@ -3,24 +3,47 @@ var moveSpeed = 0
 var maxMoveSpeed = 5
 var turnSpeed = 0
 
-
 var degree = 0 
 var bullet = preload("res://entities/bullet.tscn")
 
 func _ready() -> void:
-	print(DisplayServer.window_get_size().x)
+	$ShootCD.wait_time = Globals.playerShootSpeed
+	#print(DisplayServer.window_get_size().x)
 	$Fire.play("Blast!")
 
 func _shoot():
+	if($ShootCD.is_stopped()):
 	# Creates bullet in front of the ship.
-	var shot = bullet.instantiate()
-	shot.position = $ShootArea.global_position
-	shot.rotation = self.rotation
-	add_sibling(shot)
-	#print(str(shot) + "Position: " + str(shot.global_position))
+		var array = []
+		for i in range(Globals.playerBulletCount / 2):
+			var shot = bullet.instantiate()
+			shot.position = $ShootArea.global_position 
+			shot.rotation_degrees = self.rotation_degrees + 5 * i
+			shot.scale *= Globals.playerBulletSize
+			array.append(shot)
+		for i in range(Globals.playerBulletCount / 2):
+			var shot = bullet.instantiate()
+			shot.position = $ShootArea.global_position 
+			shot.rotation_degrees = self.rotation_degrees - 5 * i
+			shot.scale *= Globals.playerBulletSize
+			array.append(shot)
+		
+		var shot = bullet.instantiate()
+		shot.position = $ShootArea.global_position
+		shot.rotation = self.rotation
+		shot.scale *= Globals.playerBulletSize
+		array.append(shot)
+		
+		for i in range(array.size()):
+			add_sibling(array[i])
+		$ShootCD.start()
+	#else:
+		#print("You can not shoot yet!")
 
 # Updates ran every frame
 func _process(_delta: float) -> void:
+	if(!$DashAttackCD.is_stopped()):
+		print($DashAttackCD.time_left)
 	
 	move_and_slide()
 	updateMoveSpeed()
@@ -30,6 +53,7 @@ func _process(_delta: float) -> void:
 	
 	rotation_degrees = degree
 	degree = rotation_degrees
+	$ShootCD.wait_time = Globals.playerShootSpeed
 
 
 func updateMoveSpeed():
@@ -50,13 +74,13 @@ func updateMoveSpeed():
 			moveSpeed += 0.125
 	if(moveSpeed >= maxMoveSpeed):
 		$Fire.show()
-		$FireParticles.emitting = true
+		$Particles/FireParticles.emitting = true
 		if(!$RocketSound.is_playing()):
 			print("Fast")
 			$RocketSound.play()
 	else:
 		$Fire.hide()
-		$FireParticles.emitting = false
+		$Particles/FireParticles.emitting = false
 		$RocketSound.stop()
 func updateTurnSpeed():
 	if(Input.is_action_pressed("Right")):
@@ -73,8 +97,12 @@ func updateTurnSpeed():
 		else:
 			turnSpeed *= 0.2
 func updatePlayerAction():
-	if(Input.is_action_just_pressed("Schüt")):
-		_shoot()
+	if(Globals.autofire):
+		if(Input.is_action_pressed("Schüt")):
+			_shoot()
+	else:
+		if(Input.is_action_just_pressed("Schüt")):
+			_shoot()
 		
 	if(Input.is_action_pressed("Left")): 
 		degree += turnSpeed
@@ -85,14 +113,17 @@ func updatePlayerAction():
 	moveSpeed = snappedf(moveSpeed, 0.05)
 	turnSpeed = snappedf(turnSpeed, 0.05)
 func updateParticles():
-	$FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
-	$FireParticles.set_rotation(degree)
+	$Particles/FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
+	$Particles/FireParticles.set_rotation(degree)
 
 func _on_hitbox_body_entered(_body: Node2D) -> void:
 	print("Ouch")
-	Globals.loseHealth(1)
-	#body.queue_free()
-
+	if($Particles/FireParticles.emitting && Globals.playerDashAttack && $DashAttackCD.is_stopped()):
+		# Make it so points are earned from doing this
+		_body.queue_free()
+		$DashAttackCD.start()
+	else:	
+		Globals.loseHealth(1)
+	
 func _on_collection_area_entered(_area: Area2D) -> void:
 	print("Good")
-	
