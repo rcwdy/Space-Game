@@ -118,7 +118,7 @@ func updateParticles():
 
 func _on_hitbox_body_entered(_body: Node2D) -> void:
 	print("Ouch")
-	if($FireParticles.emitting && Globals.playerDashAttack && $DashAttackCD.is_stopped()):
+	if($Particles/FireParticles.emitting && Globals.playerDashAttack && $DashAttackCD.is_stopped()):
 		# Make it so points are earned from doing this
 		_body.queue_free()
 		$DashAttackCD.start()
