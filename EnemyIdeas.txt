@@ -1,0 +1,64 @@
+n = arbitrary value
+currency = used to buy upgrades
+HP = health points
+
+Asteroid
+  - Basic Enemy
+  - Moves in a straight line
+  - Average HP
+  - Low currency
+  - Stats increase with progression
+Splitting Asteroid
+  - Splits into Asteroids when destroyed.
+  - Spawned asteroids have a fraction of parent's HP
+  - Moves in a straight line
+  - Slightly below average HP
+  - Low currency + n * (currency / n)
+    - n = amount of asteroids spawned
+
+  - Stats increase with progression
+  - More asteroids are spawned as the game progresses
+Homing Asteroid
+  - Homes into the player when close enough
+  - Moves in a straight line until player is within detect radius
+  - Slightly below average HP
+Martyrdom
+  - When slain, explodes into 'enemy' bullets when destroyed
+  - Takes a few seconds to explode
+  - Very low HP
+  - Medium currency
+Golden Asteroid
+  - Higher stats than normal asteroid
+  - Drops a lot of currency when slain
+  - High HP
+  - Rare
+Orbit
+  - Moves nearby entities to itself
+  - Effect is stronger on other enemies than the player
+  - Above average HP
+  - Medium Currency
+
+Release
+  - Moves nearby entities away from itself
+  - Effect is stronger on other enemies than the player
+  - Above average HP
+  - Medium Currency
+
+Laser Asteroid
+  - Shoots a laser aimed at the player
+  - Takes a bit of time to aim and stops aiming about 1.5 seconds before firing. 
+  - Laser is shot for a few seconds.
+  - Below average HP
+  - Medium-High Currency
+
+BFG (Big Freaking Geode)
+  - The big bad enemy that the player must destroy before it takes over the whole playing field.
+  - Highlights where it will spawn so player does not get unfairly killed by it.
+  - Lots of HP, Lots of Currency
+
+AntI-Player
+  - Acts similar to how the player would
+  - Has stats similar to the player
+  - Very Rare/Boss
+  - I've never coded something like this before but it would be cool 	if it worked out
+
