@@ -118,12 +118,15 @@ func updateParticles():
 
 func _on_hitbox_body_entered(_body: Node2D) -> void:
 	print("Ouch")
-	if($FireParticles.emitting && Globals.playerDashAttack && $DashAttackCD.is_stopped()):
-		# Make it so points are earned from doing this
-		_body.queue_free()
-		$DashAttackCD.start()
-	else:	
-		Globals.loseHealth(1)
+	if has_node("FireParticles") and $DashAttackCD.is_stopped() and Globals.playerDashAttack:
+		var particles = get_node("FireParticles")
+		if particles.emitting:
+			_body.queue_free()
+			$DashAttackCD.start()
+			get_tree().change_scene_to_file("res://game_over.tscn")  # Trigger game over scene
+
+			
+
 	
 func _on_collection_area_entered(_area: Area2D) -> void:
 	print("Good")
