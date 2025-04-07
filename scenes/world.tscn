@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5bvgn24kl1u7"]
 
-[ext_resource type="Script" uid="uid://dyyds63py6fje" path="res://scenes/world.gd" id="1_71j4m"]
+[ext_resource type="Script" uid="uid://dyyds63py6fje" path="res://scripts/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://uw8mao5aqxbf" path="res://images/SPACE.png" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cdsbh2hltec8k" path="res://entities/player.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://cxb5cj6r11f41" path="res://entities/enemyCornerSpawner.tscn" id="4_k0juu"]
@@ -50,8 +50,3 @@ offset_bottom = 40.0
 [node name="Pause" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
 offset_left = 3.0
 offset_right = 3.0
-
-[node name="Health Placeholder" type="Label" parent="."]
-offset_right = 127.0
-offset_bottom = 23.0
-text = "Health Counter: "

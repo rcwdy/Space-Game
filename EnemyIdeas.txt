@@ -14,7 +14,7 @@ Splitting Asteroid
   - Moves in a straight line
   - Slightly below average HP
   - Low currency + n * (currency / n)
-    - n = amount of asteroids spawned
+	- n = amount of asteroids spawned
 
   - Stats increase with progression
   - More asteroids are spawned as the game progresses
@@ -61,4 +61,3 @@ AntI-Player
   - Has stats similar to the player
   - Very Rare/Boss
   - I've never coded something like this before but it would be cool 	if it worked out
-
