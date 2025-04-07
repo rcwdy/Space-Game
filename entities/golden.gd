@@ -8,7 +8,7 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color.GOLDENROD, 0.5)
 
-	speed = randf_range(0.1,1) * 2
+	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1)) * 2
 	$CollisionArea.disabled = false
 
 func dead():

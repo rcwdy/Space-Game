@@ -24,12 +24,13 @@ func _ready() ->void:
 		can_produce = true
 
 func _process(delta: float) -> void:
-	print("Time until next spawn: " + str($SpawnTimer.time_left))
-	print("Wait Time: " + str($SpawnTimer.wait_time))
+	pass
+	#print("Time until next spawn: " + str($SpawnTimer.time_left))
+	#print("Wait Time: " + str($SpawnTimer.wait_time))
 
 func _on_spawn_timer_timeout() -> void:
 	if(can_produce):
-		$SpawnTimer.set_wait_time(2.0 * (pow(1.5,1 - Globals.level)))
+		$SpawnTimer.set_wait_time(1 * (pow(1.1,1 - Globals.level)))
 		direction = randi_range(0,$Locations.get_child_count() - 1)
 		#direction = randi_range(0,3)
 		print(direction)

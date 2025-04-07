@@ -34,19 +34,15 @@ var playerBulletWave = false
 var playerBulletSlow = false
 var autofire = false
 
-var enemySpeed = 1.0
-var enemySpawnSpeed = 1.0
-var enemySpawnMax = 8
-
 var no_data = true
 
 func save_game():
-	var save = FileAccess.open("user://local_high_score.spc", FileAccess.WRITE)
+	var save = FileAccess.open("user://high_score.sav", FileAccess.WRITE)
 	save.store_string(str(high_score))
 	save.close()
 
 func load_game():
-	var save = FileAccess.open("user://local_high_score.spc", FileAccess.READ)
+	var save = FileAccess.open("user://high_score.sav", FileAccess.READ)
 	if(save != null):
 		high_score = save.get_line().to_int()
 		no_data = false
@@ -54,7 +50,7 @@ func load_game():
 
 # When no data is detected 
 func reset() -> void:
-	player_health = 10
+	player_health = 3
 	player_score = 0
 	enemy_kills = 0
 	current_exp = 0
@@ -78,7 +74,7 @@ func _ready() -> void:
 	print(Vector2(1,2.25) == Vector2(1.5,1.5))
 	reset()
 	if(no_data):
-		high_score = 100
+		high_score = 5000
 
 func _process(delta: float) -> void:
 	debugUpgrade()
@@ -132,11 +128,6 @@ func toggleDashAttack() -> void:
 
 func toggleAutoFire() -> void:
 	autofire = !autofire
-
-func levelIncrease() -> void:
-	enemySpeed += 0.1
-	enemySpawnSpeed += 0.1
-	enemySpawnMax += 1
 
 func debugUpgrade():
 	if(Input.is_action_just_pressed("Debug Increase Bullet Speed")):
