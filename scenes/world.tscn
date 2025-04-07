@@ -22,19 +22,19 @@ position = Vector2(320, 384)
 
 [node name="Enemies" parent="." instance=ExtResource("4_k0juu")]
 
-[node name="Timer Placeholder" type="Label" parent="."]
+[node name="Playtime" type="Label" parent="."]
 offset_right = 639.0
 offset_bottom = 479.0
 text = "Timer:"
 horizontal_alignment = 1
 
-[node name="Score Placeholder" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 offset_right = 640.0
 offset_bottom = 479.0
 text = "Score:"
 horizontal_alignment = 2
 
-[node name="Health Placeholder" type="Label" parent="."]
+[node name="Health" type="Label" parent="."]
 offset_right = 127.0
 offset_bottom = 23.0
 text = "Health Counter: "
@@ -51,7 +51,9 @@ offset_bottom = 40.0
 offset_left = 3.0
 offset_right = 3.0
 
-[node name="Health Placeholder" type="Label" parent="."]
-offset_right = 127.0
-offset_bottom = 23.0
-text = "Health Counter: "
+[node name="EXPBar" type="ProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+offset_left = 99.0
+offset_top = 430.0
+offset_right = 505.0
+offset_bottom = 457.0

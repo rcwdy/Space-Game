@@ -1,20 +1,20 @@
 extends CharacterBody2D
-var speed
+var speed = 0.5
 var direction: int
 var can_move = true
+var exp_value
 @onready var tween = create_tween()
 
 func _ready() -> void:
-	$Health.health = 2 
-	scale = Vector2($Health.health,$Health.health)
+	exp_value = 1
+	$Health.health = 2
+	scale *= 2
+	#scale *= Vector2($Health.health,$Health.health)
 	modulate.a = 0
-	tween.tween_property(self, "modulate", Color(1,1,1,1), 1)
-	
-	#position = Vector2(randi_range(-80,80),randi_range(-80,80))
-	speed = randf_range(0.1,1)
-	#direction = randi_range(0,360)
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
+
+	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1))
 	$CollisionArea.disabled = false
-	#print("Name:" + str(self) + str(Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))))
 
 func _process(_delta: float) -> void:
 	if(can_move):
@@ -34,5 +34,6 @@ func dead():
 		can_move = false
 		Globals.gainPoints(200)
 		Globals.enemy_kills += 1
+		Globals.gainExp(1)
 		print("Destroyed with bullets!")
 		queue_free()

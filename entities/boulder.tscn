@@ -28,7 +28,7 @@ disabled = true
 
 [node name="OnScreenState" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 4.17233e-07)
-scale = Vector2(0.8, 0.8)
+scale = Vector2(2.1, 2)
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false

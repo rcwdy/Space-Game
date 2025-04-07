@@ -1,19 +1,18 @@
 Upgrade Ideas:
 
-Faster Bullets - Integer
-More Bullets - Integer
-Homing Bullets - Binary
-Bigger Bullets - Integer (limited)
-Stronger Bullets - Integer
-Mouse-Aimed Bullets - Binary
-Wave Bullets - Binary
-Max Speed Contact Damage - Integer
-Auto-Fire - Binary
+Faster Bullets - Integer (Max Level: 20)
+More Bullets - Integer (Max Level: 5)
+Homing Bullets - Binary (Max Level: ?)
+Bigger Bullets - Integer (Max level: 5)
+Stronger Bullets - Integer (Max Level: 10 (10 is 20 damage))
+Mouse-Aimed Bullets - Binary (Max Level: 1)
+Wave Bullets - Binary (Max Level: 1)
+Max Speed Contact Damage - Integer (Max Level: ?)
+Auto-Fire - Binary (Max Level: 1)
 
-Health Increase - Integer
+Health Increase - Integer 
 Armor Increase - Integer
 Rockets - Integer
 Screen Nukes 
 
 Greater Acceleration/Deceleration
-
