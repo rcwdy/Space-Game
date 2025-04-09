@@ -1,6 +1,6 @@
 extends CharacterBody2D
 var speed = 0.5
-var direction: int
+var direction: float
 var can_move = true
 var exp_value
 @onready var tween = create_tween()
@@ -23,6 +23,10 @@ func _process(_delta: float) -> void:
 	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	var superparent = get_parent().get_parent()
+	if(superparent != null && superparent.has_node("Locations")):
+		
+	print(superparent)
 	queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -34,6 +38,6 @@ func dead():
 		can_move = false
 		Globals.gainPoints(200)
 		Globals.enemy_kills += 1
-		Globals.gainExp(1)
+		Globals.gainExp(exp_value)
 		print("Destroyed with bullets!")
 		queue_free()

@@ -8,6 +8,8 @@ Asteroid
   - Average HP
   - Low currency
   - Stats increase with progression
+  - Starts appearing on level 1
+
 Splitting Asteroid
   - Splits into Asteroids when destroyed.
   - Spawned asteroids have a fraction of parent's HP
@@ -18,6 +20,7 @@ Splitting Asteroid
 
   - Stats increase with progression
   - More asteroids are spawned as the game progresses
+  - Starts appearing on level 3
 Homing Asteroid
   - Homes into the player when close enough
   - Moves in a straight line until player is within detect radius
@@ -37,12 +40,14 @@ Orbit
   - Effect is stronger on other enemies than the player
   - Above average HP
   - Medium Currency
+  - Starts appearing on level 6
 
 Release
   - Moves nearby entities away from itself
   - Effect is stronger on other enemies than the player
   - Above average HP
   - Medium Currency
+  - Starts appearing on level 6
 
 Laser Asteroid
   - Shoots a laser aimed at the player
@@ -50,6 +55,7 @@ Laser Asteroid
   - Laser is shot for a few seconds.
   - Below average HP
   - Medium-High Currency
+  - Starts appearing on level 10
 
 BFG (Big Freaking Geode)
   - The big bad enemy that the player must destroy before it takes over the whole playing field.

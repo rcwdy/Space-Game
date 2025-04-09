@@ -20,7 +20,7 @@ texture = ExtResource("2_qfnet")
 [node name="Player" parent="." instance=ExtResource("3_i7141")]
 position = Vector2(320, 384)
 
-[node name="Enemies" parent="." instance=ExtResource("4_k0juu")]
+[node name="Corner Spawner" parent="." instance=ExtResource("4_k0juu")]
 
 [node name="Playtime" type="Label" parent="."]
 offset_right = 639.0

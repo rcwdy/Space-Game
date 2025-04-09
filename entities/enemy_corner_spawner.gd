@@ -34,7 +34,7 @@ func _on_spawn_timer_timeout() -> void:
 		direction = randi_range(0,$Locations.get_child_count() - 1)
 		#direction = randi_range(0,3)
 		print(direction)
-		spawn(direction)
+		spawn(direction,false)
 
 func cardinal(value: int) -> String:
 	match(value):
@@ -56,7 +56,10 @@ func cardinal(value: int) -> String:
 			return 'SOUTHEAST'
 	return 'ERROR'
 
-func spawn(value: int) -> void:
+func respawn():
+	pass
+
+func spawn(value: int, new: bool) -> void:
 	
 	if(can_produce && $Enemies.get_child_count() < 8 + Globals.level - 1):
 		var boulder = pickEnemy().instantiate()
@@ -114,6 +117,60 @@ func spawn(value: int) -> void:
 				boulder.direction = randi_range(185,265)
 		print(boulder.direction)
 		$Enemies.add_child(boulder,true)
+
+func newCoords(value) -> Vector3:
+		var coords: Vector3
+		var side = randi_range(0,1)
+		match(value):
+			NORTHWEST:
+				if(side):
+					coords.x = randf_range(0,Globals.screenRes.x / 4)
+					coords.y = 0
+				else:
+					coords.x = 0
+					coords.y = randf_range(0,Globals.screenRes.y / 4)
+				coords.z = randi_range(5,85)
+			NORTH:
+					coords.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
+					coords.y = 0
+					coords.z = randi_range(10,170)
+			NORTHEAST:
+				if(side):
+					coords.x = randf_range(3 * Globals.screenRes.x / 4,Globals.screenRes.x)
+					coords.y = 0
+				else:
+					coords.x = 0
+					coords.y = randf_range(0,Globals.screenRes.y / 4)
+				coords.z = randi_range(95,175)
+			WEST:
+					coords.x = 0
+					coords.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
+					coords.z = randi_range(-85,85)
+			EAST:
+					coords.x = Globals.screenRes.x
+					coords.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
+					coords.z = randi_range(90,270)
+			SOUTHWEST:
+				if(side):
+					coords.x = randf_range(0,Globals.screenRes.x / 4)
+					coords.y = Globals.screenRes.y
+				else:
+					coords.x = 0
+					coords.y = randf_range(3 * Globals.screenRes.y / 4,Globals.screenRes.y)
+				coords.z = randi_range(-5,-85)
+			SOUTH:
+					coords.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
+					coords.y = Globals.screenRes.y
+					coords.z = randi_range(-10,-170)
+			SOUTHEAST:
+				if(side):
+					coords.x = randf_range(3 * Globals.screenRes.x / 4, Globals.screenRes.x)
+					coords.y = Globals.screenRes.y
+				else:
+					coords.x = Globals.screenRes.x
+					coords.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
+				coords.z = randi_range(185,265)
+		return coords
 
 func pickEnemy() -> Resource:
 	var lvl = Globals.level
