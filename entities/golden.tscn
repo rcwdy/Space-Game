@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxywb6jmnc3ny"]
+
+[ext_resource type="PackedScene" uid="uid://dj4vw527rb4eg" path="res://entities/boulder.tscn" id="1_y66ui"]
+[ext_resource type="Script" uid="uid://dfjf3ieoy7shv" path="res://entities/golden.gd" id="2_wx3nd"]
+
+[node name="Golden" instance=ExtResource("1_y66ui")]
+modulate = Color(1, 1, 0, 1)
+script = ExtResource("2_wx3nd")

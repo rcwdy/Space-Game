@@ -33,6 +33,7 @@ position = Vector2(640, 480)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Center" type="Marker2D" parent="."]

@@ -1,20 +1,20 @@
 extends CharacterBody2D
-var speed
-var direction: int
+var speed = 0.5
+var direction: float
 var can_move = true
+var exp_value
 @onready var tween = create_tween()
 
 func _ready() -> void:
-	$Health.health = 2 
-	scale = Vector2($Health.health,$Health.health)
+	exp_value = 1
+	$Health.health = 2
+	scale *= 2
+	#scale *= Vector2($Health.health,$Health.health)
 	modulate.a = 0
-	tween.tween_property(self, "modulate", Color(1,1,1,1), 1)
-	
-	#position = Vector2(randi_range(-80,80),randi_range(-80,80))
-	speed = randf_range(0.1,1)
-	#direction = randi_range(0,360)
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
+
+	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1))
 	$CollisionArea.disabled = false
-	#print("Name:" + str(self) + str(Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))))
 
 func _process(_delta: float) -> void:
 	if(can_move):
@@ -23,6 +23,10 @@ func _process(_delta: float) -> void:
 	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	var superparent = get_parent().get_parent()
+	if(superparent != null && superparent.has_node("Locations")):
+		
+	print(superparent)
 	queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -34,5 +38,6 @@ func dead():
 		can_move = false
 		Globals.gainPoints(200)
 		Globals.enemy_kills += 1
+		Globals.gainExp(exp_value)
 		print("Destroyed with bullets!")
 		queue_free()
