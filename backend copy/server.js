@@ -23,7 +23,9 @@ const Score = mongoose.model("Score", scoreSchema);
 
 app.post("/submit-score", async (req, res) => {
   const { player, score } = req.body;
-  if (!player || !score) return res.status(400).send("Missing player or score");
+  if (!player || score === undefined || score === null) {
+    return res.status(400).send("Missing player or score");
+  }
 
   try {
     const newScore = new Score({ player, score });
