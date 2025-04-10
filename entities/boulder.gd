@@ -25,6 +25,7 @@ func _process(_delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	var superparent = get_parent().get_parent()
 	if(superparent != null && superparent.has_node("Locations")):
+		pass
 		
 	print(superparent)
 	queue_free()

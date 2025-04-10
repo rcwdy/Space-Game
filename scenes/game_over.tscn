@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7rn8ej2c26wd"]
 
-[ext_resource type="Script" uid="uid://dljlqxyr5mj8f" path="res://scripts/game_over.gd" id="1_xeevv"]
+[ext_resource type="Script" uid="uid://cpqg7m33nixi4" path="res://scripts/game_over.gd" id="1_xeevv"]
 
 [sub_resource type="Animation" id="Animation_jg8ls"]
 length = 0.15
@@ -126,6 +126,8 @@ text = "Quit"
 libraries = {
 &"": SubResource("AnimationLibrary_u063c")
 }
+
+[node name="HttpRequest" type="HTTPRequest" parent="."]
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
