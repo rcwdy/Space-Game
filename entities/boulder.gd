@@ -3,6 +3,7 @@ var speed = 0.5
 var direction: float
 var can_move = true
 var exp_value
+var level = Globals.level
 @onready var tween = create_tween()
 
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
 
-	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1))
+	speed = randf_range(0.5,1) * (1 + 0.1 * (level - 1))
 	$CollisionArea.disabled = false
 
 func _process(_delta: float) -> void:
@@ -23,11 +24,17 @@ func _process(_delta: float) -> void:
 	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	## Make boulders have an animation for respawning
 	var superparent = get_parent().get_parent()
-	if(superparent != null && superparent.has_node("Locations")):
-		
-	print(superparent)
-	queue_free()
+	if(superparent != null && superparent.has_node("Locations") && ("newCoords" in superparent)):
+		pass
+		var relocation = superparent.newCoords(randi_range(0,7))
+		print("New Instructions: " + str(relocation))
+		global_position.x = relocation.x
+		global_position.y = relocation.y
+		direction = relocation.z
+	else:
+		queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	$Health.health -= Globals.playerBulletDamage

@@ -5,8 +5,8 @@ var boulder_make = preload("res://entities/boulder.tscn")
 var split_make = preload("res://entities/split.tscn")
 var marty_make = preload("res://entities/martyrdom.tscn")
 var gold_make = preload("res://entities/golden.tscn")
-
-var enemyArray = [boulder_make,split_make,marty_make]
+var homing_make = preload("res://entities/homing.tscn")
+var bfg_make = preload("res://entities/bfg.tscn")
 
 var can_produce = false
 
@@ -56,72 +56,24 @@ func cardinal(value: int) -> String:
 			return 'SOUTHEAST'
 	return 'ERROR'
 
-func respawn():
-	pass
-
-func spawn(value: int, new: bool) -> void:
+func spawn(corner: int, new: bool) -> void:
 	
 	if(can_produce && $Enemies.get_child_count() < 8 + Globals.level - 1):
 		var boulder = pickEnemy().instantiate()
 		#var boulder = boulder_make.instantiate()
 		var side = randi_range(0,1)
 		print("Side" + str(side))
-		match(value):
-			NORTHWEST:
-				if(side):
-					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
-					boulder.position.y = 0
-				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
-				boulder.direction = randi_range(5,85)
-			NORTH:
-					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
-					boulder.position.y = 0
-					boulder.direction = randi_range(10,170)
-			NORTHEAST:
-				if(side):
-					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4,Globals.screenRes.x)
-					boulder.position.y = 0
-				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
-				boulder.direction = randi_range(95,175)
-			WEST:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
-					boulder.direction = randi_range(-85,85)
-			EAST:
-					boulder.position.x = Globals.screenRes.x
-					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
-					boulder.direction = randi_range(90,270)
-			SOUTHWEST:
-				if(side):
-					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
-					boulder.position.y = Globals.screenRes.y
-				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(3 * Globals.screenRes.y / 4,Globals.screenRes.y)
-				boulder.direction = randi_range(-5,-85)
-			SOUTH:
-					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
-					boulder.position.y = Globals.screenRes.y
-					boulder.direction = randi_range(-10,-170)
-			SOUTHEAST:
-				if(side):
-					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4, Globals.screenRes.x)
-					boulder.position.y = Globals.screenRes.y
-				else:
-					boulder.position.x = Globals.screenRes.x
-					boulder.position.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
-				boulder.direction = randi_range(185,265)
-		print(boulder.direction)
+		var coords = newCoords(corner)
+		boulder.global_position.x = coords.x
+		boulder.global_position.y = coords.y
+		boulder.direction = coords.z
 		$Enemies.add_child(boulder,true)
 
-func newCoords(value) -> Vector3:
+func newCoords(corner: int) -> Vector3:
 		var coords: Vector3
 		var side = randi_range(0,1)
-		match(value):
+		print(rad_to_deg(($Locations.get_child(corner)).get_angle_to($Center.position)) + randi_range(-30,30))
+		match(corner):
 			NORTHWEST:
 				if(side):
 					coords.x = randf_range(0,Globals.screenRes.x / 4)
@@ -170,8 +122,9 @@ func newCoords(value) -> Vector3:
 					coords.x = Globals.screenRes.x
 					coords.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
 				coords.z = randi_range(185,265)
+		coords.z = rad_to_deg(($Locations.get_child(corner)).get_angle_to($Center.position)) + randi_range(-30,30)
 		return coords
-
+		
 func pickEnemy() -> Resource:
 	var lvl = Globals.level
 	var num = randi_range(1,100)

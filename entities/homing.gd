@@ -2,6 +2,18 @@ extends "res://entities/boulder.gd"
 
 var enemyDetected = 0
 
+func _ready() -> void:
+	JSON
+	exp_value = 6
+	$Health.health = 2
+	scale *= 2
+	#scale *= Vector2($Health.health,$Health.health)
+	modulate.a = 0
+	tween.tween_property(self, "modulate", Color.LIME_GREEN, 0.5)
+
+	speed = randf_range(0.5,1) * (1 + 0.1 * (level - 1))
+	$CollisionArea.disabled = false
+
 func _process(_delta: float) -> void:
 	if(can_move):
 		position += speed * Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))
