@@ -23,18 +23,16 @@ func _ready() ->void:
 	if(("time" in parent && parent.has_node("Player"))):
 		can_produce = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
-	#print("Time until next spawn: " + str($SpawnTimer.time_left))
-	#print("Wait Time: " + str($SpawnTimer.wait_time))
 
 func _on_spawn_timer_timeout() -> void:
 	if(can_produce):
-		$SpawnTimer.set_wait_time(1 * (pow(1.1,1 - Globals.level)))
+		$SpawnTimer.set_wait_time(1.25 * (pow(1.1,1 - Globals.level)))
 		direction = randi_range(0,$Locations.get_child_count() - 1)
 		#direction = randi_range(0,3)
 		print(direction)
-		spawn(direction,false)
+		spawn(direction)
 
 func cardinal(value: int) -> String:
 	match(value):
@@ -56,18 +54,21 @@ func cardinal(value: int) -> String:
 			return 'SOUTHEAST'
 	return 'ERROR'
 
-func spawn(corner: int, new: bool) -> void:
-	
-	if(can_produce && $Enemies.get_child_count() < int(Spawns.json_data["level"+str(Globals.level)].get("max_enemies"))):
-		var boulder = pickEnemy().instantiate()
-		#var boulder = boulder_make.instantiate()
-		var side = randi_range(0,1)
-		print("Side" + str(side))
-		var coords = newCoords(corner)
-		boulder.global_position.x = coords.x
-		boulder.global_position.y = coords.y
-		boulder.direction = coords.z
-		$Enemies.add_child(boulder,true)
+func spawn(corner: int, override: bool = false) -> void:
+	if(can_produce):
+		if(override || $Enemies.get_child_count() < Globals.max_enemies):
+			var boulder = pickEnemy().instantiate()
+			var side = randi_range(0,1)
+			print("Side" + str(side))
+			var coords = newCoords(corner)
+			boulder.global_position.x = coords.x
+			boulder.global_position.y = coords.y
+			boulder.direction = coords.z
+			
+			# Base Speed * Speed Multiplier By Level + 10-Level Loop Speed Increase
+			
+			boulder.speed = randf_range(0.5,0.7) * (Spawns.data["level"+str(Globals.level % 10 + 1)].get("enemy_speed")) + (0.6 * ((Globals.level - 1) / 10))
+			$Enemies.add_child(boulder,true)
 
 func newCoords(corner: int) -> Vector3:
 		var coords: Vector3
@@ -117,38 +118,29 @@ func newCoords(corner: int) -> Vector3:
 		coords.z = rad_to_deg(($Locations.get_child(corner)).get_angle_to($Center.position)) + randi_range(-30,30)
 		print("Corner: " + str(cardinal(corner)) + str(coords))
 		return coords
-		
+
 func pickEnemy() -> Resource:
 	var lvl = Globals.level
-	var num = randi_range(1,100)
-	match(lvl):
-		1, 2:
-			return boulder_make
-		3:
-			if(num <= 75):
-				return boulder_make
-			else:
-				return split_make
-		4:
-			if(num <= 65):
-				return boulder_make
-			else:
-				return split_make
-		5, 6:
-			if(num <= 60):
-				return boulder_make
-			elif(num <= 90):
-				return split_make
-			else:
-				return marty_make
-		7:
-			if(num <= 48):
-				return boulder_make
-			elif(num <= 82):
-				return split_make
-			elif(num <= 98):
-				return marty_make
-			else:
-				return gold_make
-		_:
-			return boulder_make
+	var num = randi_range(0,99)
+	var table = Spawns.data["level" + str((lvl - 1) % 10 + 1)]["enemies"]
+	for i in table:
+		var requirement = table[i]
+		if(num < requirement):
+			return enemyStringToResource(i)
+	return boulder_make
+
+func enemyStringToResource(name: String) -> Resource:
+	if(name == "boulder"):
+		return boulder_make
+	elif(name == "split"):
+		return split_make
+	elif(name == "martyrdom"):
+		return marty_make
+	elif(name == "golden"):
+		return gold_make
+	elif(name == "homing"):
+		return homing_make
+	elif(name == "bfg"):
+		return bfg_make
+	else:
+		return boulder_make

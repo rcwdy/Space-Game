@@ -1,0 +1,92 @@
+{
+	"level1":{
+	"enemy_speed":1,
+	"spawn_speed":1,
+	"enemies":{
+		"boulder": 100
+	}
+	},
+	"level2":{
+	"enemy_speed":1.1,
+	"spawn_speed":1.1,
+	"enemies":{
+		"split":20,
+		"boulder":100,
+	}
+	},
+	"level3":{
+	"enemy_speed":1.2,
+	"spawn_speed":1.2,
+	"enemies":{
+		"split":25,
+		"boulder":100,
+	}
+	},
+	"level4":{
+	"enemy_speed":1.3,
+	"spawn_speed":1.3,
+	"enemies":{
+		"martyrdom":10,
+		"split":40,
+		"boulder":100,
+	}
+	},
+	"level5":{
+	"enemy_speed":1.3,
+	"spawn_speed":1.4,
+	"enemies":{
+		"martyrdom":10,
+		"split":40,
+		"boulder":100,
+	}
+	},
+	"level6":{
+	"enemy_speed":1.4,
+	"spawn_speed":1.45,
+	"enemies":{
+		"golden": 2,
+		"martyrdom":18,
+		"split":52,
+		"boulder":100,
+	}
+	},
+	"level7":{
+	"enemy_speed":1.5,
+	"spawn_speed":1.5,
+	"enemies":{
+		"golden": 3,
+		"martyrdom":20,
+		"split":55,
+		"boulder":100,
+	}
+	},
+	"level8":{
+	"enemy_speed":1.6,
+	"spawn_speed":1.55,
+	"enemies":{
+		"golden": 5,
+		"homing": 15,
+		"martyrdom":35,
+		"split":60,
+		"boulder":100,
+	}
+	},
+	"level9":{
+	"enemy_speed":1.6,
+	"spawn_speed":1.6,
+	"enemies":{
+		"golden": 10,
+		"martyrdom":20,
+		"split":30,
+		"boulder":40,
+		"homing": 100,
+	}
+	},
+	"level10":{
+	"enemy_speed":1,
+	"spawn_speed":1,
+	"enemies":{
+		"bfg":100,
+	}
+	},
+}

@@ -9,14 +9,10 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color.CRIMSON, 0.5)
 
-	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1))
-	print("Angle to North" + str(rad_to_deg(self.get_angle_to($Markers/North.global_position))))
-	print("Angle to South" + str(rad_to_deg(self.get_angle_to($Markers/South.global_position))))
-	print("Angle to East" +  str(rad_to_deg(self.get_angle_to($Markers/West.global_position))))
-	print("Angle to West" +  str(rad_to_deg(self.get_angle_to($Markers/East.global_position))))
+	speed *= 1.5
 	$CollisionArea.disabled = false
 
-func remove(normal_enemy: bool = false):
+func remove(_normal_enemy: bool = false):
 	super.remove()
 	for i in range(4):
 		var bullet = bullet_make.instantiate()

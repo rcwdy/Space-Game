@@ -8,9 +8,13 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
 
-	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1)) * 0.1
-	$CollisionArea.disabled = false
+	speed *= 0.2
+	
 
-func remove(normal_enemy: bool = false):
+func remove(_normal_enemy: bool = false):
 	super.remove()
 	queue_free()
+
+
+func _on_timer_timeout() -> void:
+	$CollisionArea.disabled = false

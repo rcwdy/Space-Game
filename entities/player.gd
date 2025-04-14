@@ -18,13 +18,13 @@ func _shoot():
 		for i in range(Globals.playerBulletCount / 2):
 			var shot = bullet.instantiate()
 			shot.position = $ShootArea.global_position 
-			shot.rotation_degrees = self.rotation_degrees + 5 * i
+			shot.rotation_degrees = self.rotation_degrees + 5 * (1 + i)
 			shot.scale *= Globals.playerBulletSize
 			array.append(shot)
 		for i in range(Globals.playerBulletCount / 2):
 			var shot = bullet.instantiate()
 			shot.position = $ShootArea.global_position 
-			shot.rotation_degrees = self.rotation_degrees - 5 * i
+			shot.rotation_degrees = self.rotation_degrees - 5 * (1 + i)
 			shot.scale *= Globals.playerBulletSize
 			array.append(shot)
 		

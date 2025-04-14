@@ -15,7 +15,8 @@ func _on_on_screen_state_screen_exited() -> void:
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
-	queue_free()
+	if(area.collision_layer == "0000010".bin_to_int()):
+		queue_free()
 
 func _homing() -> void:
 	var temp = $"Homing Area".get_overlapping_areas()

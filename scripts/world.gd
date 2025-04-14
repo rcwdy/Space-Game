@@ -7,7 +7,6 @@ func CheckAlive():
 		Globals.save_game()
 		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
-
 func _process(_delta: float) -> void:
 	$"Health".text = "Health:" +str(Globals.player_health)
 	time += _delta
@@ -20,3 +19,5 @@ func _process(_delta: float) -> void:
 	
 	$EXPBar.max_value = Globals.level_req
 	$EXPBar.value = Globals.current_exp
+	$EXPBar/Level.set_text("Level: " + str(Globals.level))
+	$EXPBar/Goal.set_text(str(int($EXPBar.max_value)))

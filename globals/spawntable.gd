@@ -1,11 +1,10 @@
 extends Node
 
-var json_data = {}
-var path = "res://spawntable.json"
+var data = {}
+var path = "res://globals/spawntable.json"
 
 func _ready() -> void:
-	json_data = json_read(path)
-	print(int(json_data["level"+str(1)].get("max_enemies")))
+	data = json_read(path)
 
 func json_read(file_path : String):
 	if FileAccess.file_exists(file_path):

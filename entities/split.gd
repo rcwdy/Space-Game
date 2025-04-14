@@ -11,10 +11,10 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color.SKY_BLUE, 0.5)
 
-	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1)) * 0.8
+	speed *= 0.8
 	$CollisionArea.disabled = false
 
-func remove(normal_enemy: bool = false):
+func remove(_normal_enemy: bool = false):
 	super.remove()
 	var spawn_count = 2 + (level / 10)
 	for i in range(spawn_count):
@@ -22,5 +22,6 @@ func remove(normal_enemy: bool = false):
 		boulder.global_position = self.position
 		boulder.direction = self.direction - (180/(spawn_count * 2)) + (i % spawn_count * (180/spawn_count))
 		print(i)
+		boulder.speed = randf_range(0.5,0.7) * (Spawns.data["level"+str(level % 10 + 1)].get("enemy_speed")) + (0.6 * ((level - 1) / 10))
 		add_sibling(boulder,1)
 	queue_free()

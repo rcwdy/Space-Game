@@ -27,6 +27,8 @@ var playerBulletCount = 0
 var playerBulletHoming = false
 var playerBulletSize = 1.0
 var playerBulletDamage = 10
+var playerBulletDamageNext = 5
+
 var playerDashAttack = 0
 
 var playerBulletMouse = false
@@ -35,6 +37,8 @@ var playerBulletSlow = false
 var autofire = false
 
 var no_data = true
+
+var max_enemies = 4
 
 func save_game():
 	var save = FileAccess.open("user://high_score.sav", FileAccess.WRITE)
@@ -64,7 +68,12 @@ func reset() -> void:
 	playerBulletHoming = 0
 	playerDashAttack = 0
 	playerShootSpeed = 0.25
+	
+	playerBulletDamageNext = 5
+	
 	autofire = false
+	
+	max_enemies = 4
 	
 func _ready() -> void:
 	#Testing
@@ -95,6 +104,7 @@ func gainExp(exp: int) -> void:
 	current_exp += exp
 	if(current_exp >= level_req):
 		level += 1
+		max_enemies = 4 + (level / 2)
 		level_req = (int)(level_req * 1.5)
 
 func debugExp() -> void:
@@ -109,8 +119,9 @@ func bulletSizeIncrease() -> void:
 		playerBulletSize += 0.4
 
 func bulletDamageIncrease() -> void:
-	if(playerBulletDamage < 10):
-		playerBulletDamage += 1
+	if(playerBulletDamage < 150):
+		playerBulletDamage += playerBulletDamageNext
+		playerBulletDamageNext += 5
 
 func bulletCountIncrease() -> void:
 	if(playerBulletCount < 10):

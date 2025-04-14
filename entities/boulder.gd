@@ -21,7 +21,6 @@ func _ready() -> void:
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
 
-	speed = randf_range(0.5,1) * (1 + 0.1 * (level - 1))
 	$CollisionArea.disabled = false
 
 func _process(_delta: float) -> void:
@@ -44,7 +43,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	else:
 		queue_free()
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
+func _on_hitbox_area_entered(_area: Area2D) -> void:
 	health -= Globals.playerBulletDamage
 	print("Health Remaining: " + str(health))
 
