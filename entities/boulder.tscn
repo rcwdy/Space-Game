@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dj4vw527rb4eg"]
+[gd_scene load_steps=5 format=3 uid="uid://dj4vw527rb4eg"]
 
 [ext_resource type="Script" uid="uid://xgmka2ewusth" path="res://entities/boulder.gd" id="1_dgbyp"]
 [ext_resource type="Texture2D" uid="uid://tlcwnk6g15a6" path="res://images/asteroid.bmp" id="2_dicgi"]
-[ext_resource type="PackedScene" uid="uid://eum0yktl0uuk" path="res://scenes/health.tscn" id="3_dgbyp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xs80f"]
 radius = 7.0
@@ -23,8 +22,6 @@ texture = ExtResource("2_dicgi")
 visible = false
 shape = SubResource("CircleShape2D_xs80f")
 disabled = true
-
-[node name="Health" parent="." instance=ExtResource("3_dgbyp")]
 
 [node name="OnScreenState" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 4.17233e-07)

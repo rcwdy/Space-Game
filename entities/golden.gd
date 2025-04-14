@@ -2,7 +2,7 @@ extends "res://entities/boulder.gd"
 
 func _ready() -> void:
 	exp_value = 20
-	$Health.health = 7
+	health = 150
 	scale *= 3
 	#scale *= Vector2($Health.health,$Health.health)
 	modulate.a = 0
@@ -11,11 +11,6 @@ func _ready() -> void:
 	speed = randf_range(0.5,1) * (1 + 0.1 * (Globals.level - 1)) * 2
 	$CollisionArea.disabled = false
 
-func dead():
-	if($Health.health <= 0):
-		can_move = false
-		Globals.gainPoints(1000)
-		Globals.gainExp(20)
-		Globals.enemy_kills += 1
-		print("Destroyed with bullets!")
-		queue_free()
+func remove(normal_enemy: bool = false):
+	super.remove()
+	queue_free()

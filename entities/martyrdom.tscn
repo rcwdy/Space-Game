@@ -7,10 +7,10 @@
 modulate = Color(1, 0, 0, 1)
 script = ExtResource("2_8e7yv")
 
-[node name="ExplodeTimer" type="Timer" parent="." index="5"]
+[node name="ExplodeTimer" type="Timer" parent="." index="4"]
 wait_time = 2.5
 
-[node name="Markers" type="Node2D" parent="." index="6"]
+[node name="Markers" type="Node2D" parent="." index="5"]
 
 [node name="North" type="Marker2D" parent="Markers" index="0"]
 position = Vector2(0, -8)

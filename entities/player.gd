@@ -116,14 +116,17 @@ func updateParticles():
 	$Particles/FireParticles.set_direction(Vector2(cos(rotation),sin(rotation)))
 	$Particles/FireParticles.set_rotation(degree)
 
-func _on_hitbox_body_entered(_body: Node2D) -> void:
+func _on_hitbox_body_entered(body: Node2D) -> void:
 	print("Ouch")
 	if($Particles/FireParticles.emitting && Globals.playerDashAttack && $DashAttackCD.is_stopped()):
 		# Make it so points are earned from doing this
-		_body.queue_free()
+		body.queue_free()
 		$DashAttackCD.start()
 	else:	
-		Globals.loseHealth(1)
+		if("health" in body):
+			Globals.loseHealth(body.health)
+		if("dead" in body):
+			body.dead(true)
 	
 func _on_collection_area_entered(_area: Area2D) -> void:
 	print("Good")

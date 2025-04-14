@@ -5,6 +5,7 @@ func _ready():
 	$"High-Score".text = "High Score:\n" + str(Globals.high_score)
 #Add scene change 
 func _on_start_button_pressed() -> void:
+	Globals.reset()
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
 func _on_quit_button_pressed() -> void:

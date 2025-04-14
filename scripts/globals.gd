@@ -7,13 +7,13 @@ enum{
 
 var debug_upgrade_num = 0
 
-var player_health
-var player_score
+var player_health = 100
+var player_score = 0
 var high_score
-var enemy_kills
+var enemy_kills = 0
 
-var current_exp
-var level
+var current_exp = 0
+var level = 1
 var level_req = 10
 
 var screenRes = DisplayServer.window_get_size()
@@ -26,7 +26,7 @@ var playerBulletSpeedMulti = 1.0
 var playerBulletCount = 0
 var playerBulletHoming = false
 var playerBulletSize = 1.0
-var playerBulletDamage = 1
+var playerBulletDamage = 10
 var playerDashAttack = 0
 
 var playerBulletMouse = false
@@ -50,7 +50,7 @@ func load_game():
 
 # When no data is detected 
 func reset() -> void:
-	player_health = 3
+	player_health = 100
 	player_score = 0
 	enemy_kills = 0
 	current_exp = 0
@@ -59,7 +59,7 @@ func reset() -> void:
 	
 	playerBulletSpeedMulti = 1.0 
 	playerBulletSize = 1.0
-	playerBulletDamage = 1
+	playerBulletDamage = 10
 	playerBulletCount = 0
 	playerBulletHoming = 0
 	playerDashAttack = 0
