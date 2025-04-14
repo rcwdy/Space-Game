@@ -1,9 +1,5 @@
 extends Control
 
-func _ready():
-	$AnimationPlayer.play("RESET")
-	$AnimationPlayer.play("blur")
-
 	if $HttpRequest:
 		$HttpRequest.request_completed.connect(_on_request_completed)
 		send_score("Test User", Globals.player_score)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1btiaryrhwp1"]
+[gd_scene load_steps=5 format=3 uid="uid://c7rn8ej2c26wd"]
 
-[ext_resource type="Script" uid="uid://cpqg7m33nixi4" path="res://scripts/game_over.gd" id="1_xeevv"]
+[ext_resource type="Script" uid="uid://dljlqxyr5mj8f" path="res://scripts/score_submission.gd" id="1_r1bva"]
 
 [sub_resource type="Animation" id="Animation_jg8ls"]
 length = 0.15
@@ -61,14 +61,14 @@ _data = {
 &"blur": SubResource("Animation_05lnj")
 }
 
-[node name="GameOver" type="Control"]
+[node name="ScoreSubmission" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xeevv")
+script = ExtResource("1_r1bva")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -80,7 +80,8 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,32 +95,35 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Game Over"
 
-[node name="NewGame" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="Score" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "New Game"
+size_flags_horizontal = 4
+text = "Score: "
 
-[node name="QuitToMenu" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit to Menu"
+placeholder_text = "Input Initials Here"
+alignment = 1
+max_length = 3
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 
-[node name="QuitButton" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+text = "Press Enter to submit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_u063c")
 }
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="text_submitted" from="PanelContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
