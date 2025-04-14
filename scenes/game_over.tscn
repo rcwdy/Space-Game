@@ -120,6 +120,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_u063c")
 }
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="HttpRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

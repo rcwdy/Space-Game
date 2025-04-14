@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7rn8ej2c26wd"]
+[gd_scene load_steps=5 format=3 uid="uid://6c6bsappqdnp"]
 
-[ext_resource type="Script" uid="uid://dljlqxyr5mj8f" path="res://scripts/score_submission.gd" id="1_r1bva"]
+[ext_resource type="Script" path="res://scripts/score_submission.gd" id="1_r1bva"]
 
 [sub_resource type="Animation" id="Animation_jg8ls"]
 length = 0.15
@@ -113,7 +113,7 @@ text = "Score: "
 layout_mode = 2
 placeholder_text = "Input Initials Here"
 alignment = 1
-max_length = 3
+max_length = 5
 keep_editing_on_text_submit = true
 emoji_menu_enabled = false
 
