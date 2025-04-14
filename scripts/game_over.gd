@@ -1,9 +1,5 @@
 extends Control
 
-func _ready():
-	$AnimationPlayer.play("RESET")
-	$AnimationPlayer.play("blur")
-
 func _on_quit_button_pressed() -> void:
 	Globals.save_game()
 	get_tree().quit()

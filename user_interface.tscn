@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bnnjlot4kdka8"]
-
-[node name="User Interface" type="CanvasLayer"]
-
-[node name="Background" type="ParallaxBackground" parent="."]

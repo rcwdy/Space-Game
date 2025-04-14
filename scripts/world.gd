@@ -4,8 +4,7 @@ var alive = true
 
 func CheckAlive():
 	if Globals.player_health < 1:
-		Globals.save_game()
-		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		get_tree().change_scene_to_file("res://scenes/score_submission.tscn")
 
 func _process(_delta: float) -> void:
 	$"Health".text = "Health:" +str(Globals.player_health)

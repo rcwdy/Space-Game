@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5bvgn24kl1u7"]
 
 [ext_resource type="Script" uid="uid://dyyds63py6fje" path="res://scripts/world.gd" id="1_71j4m"]
-[ext_resource type="Texture2D" uid="uid://uw8mao5aqxbf" path="res://images/SPACE.png" id="2_qfnet"]
+[ext_resource type="Texture2D" uid="uid://cg00i5lvf5yrm" path="res://images/Background1.0.png" id="2_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cdsbh2hltec8k" path="res://entities/player.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://cxb5cj6r11f41" path="res://entities/enemyCornerSpawner.tscn" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://bcqxdgag8qnm2" path="res://scenes/pause.tscn" id="5_71j4m"]
@@ -15,7 +15,7 @@ metadata/_edit_horizontal_guides_ = [480.0]
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
 offset_bottom = 480.0
-texture = ExtResource("2_qfnet")
+texture = ExtResource("2_71j4m")
 
 [node name="Player" parent="." instance=ExtResource("3_i7141")]
 position = Vector2(320, 384)
