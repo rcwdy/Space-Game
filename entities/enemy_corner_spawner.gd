@@ -24,7 +24,10 @@ func _ready() ->void:
 		can_produce = true
 
 func _process(_delta: float) -> void:
-	pass
+	if has_node("Enemies/BFG"):
+		can_produce = false
+	else:
+		can_produce = true
 
 func _on_spawn_timer_timeout() -> void:
 	if(can_produce):
