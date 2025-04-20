@@ -1,38 +1,60 @@
 extends CharacterBody2D
-var speed
-var direction: int
+var speed: float
+var direction: float
+var level = Globals.level
+
 var can_move = true
+
+var exp_value: int
+var points: int
+var health: int
+
 @onready var tween = create_tween()
 
 func _ready() -> void:
-	$Health.health = 2 
-	scale = Vector2($Health.health,$Health.health)
-	modulate.a = 0
-	tween.tween_property(self, "modulate", Color(1,1,1,1), 1)
+	exp_value = 1
+	points = 200
+	health = 25
 	
-	#position = Vector2(randi_range(-80,80),randi_range(-80,80))
-	speed = randf_range(0.1,1)
-	#direction = randi_range(0,360)
+	scale *= 2
+	#scale *= Vector2($Health.health,$Health.health)
+	modulate.a = 0
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
+
 	$CollisionArea.disabled = false
-	#print("Name:" + str(self) + str(Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))))
 
 func _process(_delta: float) -> void:
-	if(can_move):
+	if(can_move && health > 0):
 		position += speed * Vector2(cos(deg_to_rad(direction)),sin(deg_to_rad(direction)))
-	dead()
+	else:
+		remove()
 	#move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+	## Make boulders have an animation for respawning
+	var superparent = get_parent().get_parent()
+	if(superparent != null && superparent.has_node("Locations") && ("newCoords" in superparent)):
+		pass
+		var relocation = superparent.newCoords(randi_range(0,7))
+		print("New Instructions: " + str(relocation))
+		global_position.x = relocation.x
+		global_position.y = relocation.y
+		direction = relocation.z
+	else:
+		queue_free()
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	$Health.health -= Globals.playerBulletDamage
-	print("Health Remaining: " + str($Health.health))
+func _on_hitbox_area_entered(_area: Area2D) -> void:
+	health -= Globals.playerBulletDamage
+	print("Health Remaining: " + str(health))
 
-func dead():
-	if($Health.health <= 0):
-		can_move = false
-		Globals.gainPoints(200)
-		Globals.enemy_kills += 1
-		print("Destroyed with bullets!")
+#func dead(external_kill: bool = false):
+	#if(health <= 0):
+	#	kill()
+		
+func remove(normal_enemy: bool = true):
+	can_move = false
+	Globals.gainPoints(points)
+	Globals.gainExp(exp_value)
+	Globals.enemy_kills += 1
+	if(normal_enemy):
 		queue_free()

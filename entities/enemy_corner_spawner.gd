@@ -1,28 +1,37 @@
 extends Node2D
 var direction = 8
+
 var boulder_make = preload("res://entities/boulder.tscn")
+var split_make = preload("res://entities/split.tscn")
+var marty_make = preload("res://entities/martyrdom.tscn")
+var gold_make = preload("res://entities/golden.tscn")
+var homing_make = preload("res://entities/homing.tscn")
+var bfg_make = preload("res://entities/bfg.tscn")
+
 var can_produce = false
 
 enum{
 	NORTHWEST, NORTH, NORTHEAST,WEST,EAST,SOUTHWEST,SOUTH,SOUTHEAST
 }
 
+enum{
+	NORMAL = 10, SPLIT = 11
+}
+
 func _ready() ->void:
 	var parent = get_parent()
 	if(("time" in parent && parent.has_node("Player"))):
 		can_produce = true
-	
-	print($Locations.get_child(4))
-	print(rad_to_deg($Center.get_angle_to($Locations/Northwest.global_position)))
-	print(rad_to_deg($Center.get_angle_to($Locations/North.global_position)))
-	print(rad_to_deg($Center.get_angle_to($Locations/Northeast.global_position)))
-	print(rad_to_deg($Center.get_angle_to($Locations/South.global_position)))
 
-func waveIncrease()->void:
-	Globals.waveIncrease()
+func _process(_delta: float) -> void:
+	if has_node("Enemies/BFG"):
+		can_produce = false
+	else:
+		can_produce = true
 
 func _on_spawn_timer_timeout() -> void:
 	if(can_produce):
+		$SpawnTimer.set_wait_time(1.25 * (pow(1.1,1 - Globals.level)))
 		direction = randi_range(0,$Locations.get_child_count() - 1)
 		#direction = randi_range(0,3)
 		print(direction)
@@ -48,60 +57,93 @@ func cardinal(value: int) -> String:
 			return 'SOUTHEAST'
 	return 'ERROR'
 
-func spawn(value: int) -> void:
-	
-	if(can_produce && $Enemies.get_child_count() < 16):
-		var boulder = boulder_make.instantiate()
+func spawn(corner: int, override: bool = false) -> void:
+	if(can_produce):
+		if(override || $Enemies.get_child_count() < Globals.max_enemies):
+			var boulder = pickEnemy().instantiate()
+			var side = randi_range(0,1)
+			print("Side" + str(side))
+			var coords = newCoords(corner)
+			boulder.global_position.x = coords.x
+			boulder.global_position.y = coords.y
+			boulder.direction = coords.z
+			
+			# Base Speed * Speed Multiplier By Level + 10-Level Loop Speed Increase
+			
+			boulder.speed = randf_range(0.5,0.7) * (Spawns.data["level"+str(Globals.level % 10 + 1)].get("enemy_speed")) + (0.6 * ((Globals.level - 1) / 10))
+			$Enemies.add_child(boulder,true)
+
+func newCoords(corner: int) -> Vector3:
+		var coords: Vector3
 		var side = randi_range(0,1)
-		print("Side" + str(side))
-		match(value):
+		
+		match(corner):
 			NORTHWEST:
 				if(side):
-					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
-					boulder.position.y = 0
+					coords.x = randf_range(0,Globals.screenRes.x * 0.25)
+					coords.y = 0
 				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
-				boulder.direction = randi_range(5,85)
+					coords.x = 0
+					coords.y = randf_range(0,Globals.screenRes.y * 0.25)
 			NORTH:
-					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
-					boulder.position.y = 0
-					boulder.direction = randi_range(10,170)
+					coords.x = randf_range(Globals.screenRes.x * 0.25,Globals.screenRes.x * 0.75)
+					coords.y = 0
 			NORTHEAST:
 				if(side):
-					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4,Globals.screenRes.x)
-					boulder.position.y = 0
+					coords.x = randf_range(Globals.screenRes.x * 0.75, Globals.screenRes.x)
+					coords.y = 0
 				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(0,Globals.screenRes.y / 4)
-				boulder.direction = randi_range(95,175)
+					coords.x = Globals.screenRes.x
+					coords.y = randf_range(0,Globals.screenRes.y * 0.25)
 			WEST:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
-					boulder.direction = randi_range(-85,85)
+					coords.x = 0
+					coords.y = randf_range(Globals.screenRes.y * 0.25,Globals.screenRes.y * 0.75)
 			EAST:
-					boulder.position.x = Globals.screenRes.x
-					boulder.position.y = randf_range(Globals.screenRes.y / 4,3 * Globals.screenRes.y / 4)
-					boulder.direction = randi_range(90,270)
+					coords.x = Globals.screenRes.x
+					coords.y = randf_range(Globals.screenRes.y * 0.25,Globals.screenRes.y * 0.75)
 			SOUTHWEST:
 				if(side):
-					boulder.position.x = randf_range(0,Globals.screenRes.x / 4)
-					boulder.position.y = Globals.screenRes.y
+					coords.x = randf_range(0,Globals.screenRes.x * 0.25)
+					coords.y = Globals.screenRes.y
 				else:
-					boulder.position.x = 0
-					boulder.position.y = randf_range(3 * Globals.screenRes.y / 4,Globals.screenRes.y)
-				boulder.direction = randi_range(-5,-85)
+					coords.x = 0
+					coords.y = randf_range(Globals.screenRes.y * 0.75,Globals.screenRes.y)
 			SOUTH:
-					boulder.position.x = randf_range(Globals.screenRes.x / 4,3 * Globals.screenRes.x / 4)
-					boulder.position.y = Globals.screenRes.y
-					boulder.direction = randi_range(-10,-170)
+					coords.x = randf_range(Globals.screenRes.x * 0.25,Globals.screenRes.x * 0.75)
+					coords.y = Globals.screenRes.y
 			SOUTHEAST:
 				if(side):
-					boulder.position.x = randf_range(3 * Globals.screenRes.x / 4, Globals.screenRes.x)
-					boulder.position.y = Globals.screenRes.y
+					coords.x = randf_range(Globals.screenRes.x * 0.75, Globals.screenRes.x)
+					coords.y = Globals.screenRes.y
 				else:
-					boulder.position.x = Globals.screenRes.x
-					boulder.position.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
-				boulder.direction = randi_range(185,265)
-		print(boulder.direction)
-		$Enemies.add_child(boulder,true)
+					coords.x = Globals.screenRes.x
+					coords.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
+		coords.z = rad_to_deg(($Locations.get_child(corner)).get_angle_to($Center.position)) + randi_range(-30,30)
+		print("Corner: " + str(cardinal(corner)) + str(coords))
+		return coords
+
+func pickEnemy() -> Resource:
+	var lvl = Globals.level
+	var num = randi_range(0,99)
+	var table = Spawns.data["level" + str((lvl - 1) % 10 + 1)]["enemies"]
+	for i in table:
+		var requirement = table[i]
+		if(num < requirement):
+			return enemyStringToResource(i)
+	return boulder_make
+
+func enemyStringToResource(name: String) -> Resource:
+	if(name == "boulder"):
+		return boulder_make
+	elif(name == "split"):
+		return split_make
+	elif(name == "martyrdom"):
+		return marty_make
+	elif(name == "golden"):
+		return gold_make
+	elif(name == "homing"):
+		return homing_make
+	elif(name == "bfg"):
+		return bfg_make
+	else:
+		return boulder_make

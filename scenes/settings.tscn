@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://gr3gedwxw0qq"]
+[gd_scene load_steps=2 format=3 uid="uid://gr3gedwxw0qq"]
 
-[ext_resource type="Script" uid="uid://ct5lvtv6mlpet" path="res://settings.gd" id="1_x2hje"]
-[ext_resource type="AudioStream" uid="uid://c8avyj1njvp41" path="res://audio/spaceship-arcade-shooter-game-background-soundtrack-318508.mp3" id="2_nkug2"]
+[ext_resource type="Script" uid="uid://ct5lvtv6mlpet" path="res://scripts/settings.gd" id="1_r6d6q"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -10,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_x2hje")
+script = ExtResource("1_r6d6q")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -29,9 +28,9 @@ text = "Volume"
 
 [node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-min_value = -50.0
-max_value = 10.0
-value = -20.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="Mute" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,11 +52,6 @@ popup/item_3/id = 3
 [node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_nkug2")
-volume_db = -20.0
-autoplay = true
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Mute" to="." method="_on_mute_toggled"]

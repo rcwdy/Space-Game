@@ -1,9 +1,12 @@
 extends Control
 
 
+func _ready() -> void:
+	$MarginContainer/VBoxContainer/Volume.set_value(AudioServer.get_bus_volume_linear(0))
+
 func _on_volume_value_changed(value: float):
-	$AudioStreamPlayer.set_volume_db(value)
-	#AudioServer.set_bus_volume_db(0, value)
+	AudioServer.set_bus_volume_linear(0,value)
+
 
 
 func _on_mute_toggled(toggled_on: bool) -> void:

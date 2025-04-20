@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx12rc1e7lfyu"]
+
+[ext_resource type="PackedScene" uid="uid://dj4vw527rb4eg" path="res://entities/boulder.tscn" id="1_o87wm"]
+[ext_resource type="Script" uid="uid://d0ywfcrydlco6" path="res://entities/martyrdom.gd" id="2_8e7yv"]
+
+[node name="Martyrdom" instance=ExtResource("1_o87wm")]
+modulate = Color(1, 0, 0, 1)
+script = ExtResource("2_8e7yv")
+
+[node name="ExplodeTimer" type="Timer" parent="." index="4"]
+wait_time = 2.5
+
+[node name="Markers" type="Node2D" parent="." index="5"]
+
+[node name="North" type="Marker2D" parent="Markers" index="0"]
+position = Vector2(0, -8)
+
+[node name="East" type="Marker2D" parent="Markers" index="1"]
+position = Vector2(8, 0)
+
+[node name="South" type="Marker2D" parent="Markers" index="2"]
+position = Vector2(0, 8)
+
+[node name="West" type="Marker2D" parent="Markers" index="3"]
+position = Vector2(-8, 0)

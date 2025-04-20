@@ -18,7 +18,9 @@ config/icon="res://images/icon.svg"
 
 [autoload]
 
-Globals="*res://scripts/globals.gd"
+Globals="*res://globals/globals.gd"
+Spawns="*res://globals/spawntable.gd"
+BGM="*res://globals/bgm.gd"
 
 [display]
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbhehbtdyqta1"]
+
+[ext_resource type="PackedScene" uid="uid://dj4vw527rb4eg" path="res://entities/boulder.tscn" id="1_vchb0"]
+[ext_resource type="Script" uid="uid://c766cehcii4q2" path="res://entities/split.gd" id="2_aspq5"]
+
+[node name="Split" instance=ExtResource("1_vchb0")]
+modulate = Color(0.372549, 0.372549, 1, 1)
+script = ExtResource("2_aspq5")
