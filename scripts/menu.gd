@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	BGM.play_song(load("res://audio/spaceship-arcade-shooter-game-background-soundtrack-318508.mp3"))
 	$VBoxContainer/StartButton.grab_focus()
 	$"High-Score".text = "High Score:\n" + str(Globals.high_score)
 #Add scene change 
