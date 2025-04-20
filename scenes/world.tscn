@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5bvgn24kl1u7"]
+[gd_scene load_steps=7 format=3 uid="uid://b5bvgn24kl1u7"]
 
 [ext_resource type="Script" uid="uid://dyyds63py6fje" path="res://scripts/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://cg00i5lvf5yrm" path="res://images/Background1.0.png" id="2_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cdsbh2hltec8k" path="res://entities/player.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://cxb5cj6r11f41" path="res://entities/enemyCornerSpawner.tscn" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://bcqxdgag8qnm2" path="res://scenes/pause.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://8aewvacfntsp" path="res://scenes/upgrade_menu.tscn" id="6_qfnet"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_71j4m")
-metadata/_edit_lock_ = true
 metadata/_edit_vertical_guides_ = [640.0]
 metadata/_edit_horizontal_guides_ = [480.0]
 
@@ -88,3 +88,7 @@ offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 text = "Goal"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="UpgradeMenu" parent="CanvasLayer2" instance=ExtResource("6_qfnet")]
