@@ -77,6 +77,7 @@ func reset() -> void:
 	
 func _ready() -> void:
 	#Testing
+	AudioServer.set_bus_volume_linear(0,0.5)
 	load_game()
 	print(Vector2(1,1) < Vector2(0,0))
 	print(Vector2(1,1) > Vector2(0,0))
