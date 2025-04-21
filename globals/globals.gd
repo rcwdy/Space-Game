@@ -23,22 +23,24 @@ var playerShootSpeed = 0.25
 const playerBulletSpeed = 6 # Influences player bullet speed
 var playerBulletSpeedMulti = 1.0 
 
-var playerBulletCount = 0
-var playerBulletHoming = false
-var playerBulletSize = 1.0
+var playerBulletCount = 0 # Incremented by 2
+var playerBulletHoming = false # Enables bullet homing
+var playerBulletSize = 1.0 # Increases size of player shots
 var playerBulletDamage = 10
-var playerBulletDamageNext = 5
+var playerBulletLevel = 1
 
-var playerDashAttack = 0
+var playerDashAttack = 0 
 
-var playerBulletMouse = false
-var playerBulletWave = false
-var playerBulletSlow = false
-var autofire = false
-
-var no_data = true
+var autofire = 0
+#var playerBulletMouse = false
+#var playerBulletWave = false
+#var playerBulletSlow = false
 
 var max_enemies = 4
+
+#var volume = 50.0
+#var mute = false
+#var resolution = 0
 
 func save_game():
 	var save = FileAccess.open("user://high_score.sav", FileAccess.WRITE)
@@ -49,9 +51,9 @@ func load_game():
 	var save = FileAccess.open("user://high_score.sav", FileAccess.READ)
 	if(save != null):
 		high_score = save.get_line().to_int()
-		no_data = false
 		return
-
+	else:
+		high_score = 5000
 # When no data is detected 
 func reset() -> void:
 	player_health = 100
@@ -69,23 +71,29 @@ func reset() -> void:
 	playerDashAttack = 0
 	playerShootSpeed = 0.25
 	
-	playerBulletDamageNext = 5
+	playerBulletLevel = 1
 	
-	autofire = false
+	autofire = 0
 	
 	max_enemies = 4
 	
 func _ready() -> void:
 	#Testing
+	var num = 10
+	var num2 = 1
+	for i in range(101):
+		prints(i, num, num / num2)
+		num = int(num * 1.5)
+		
+			
+	
 	AudioServer.set_bus_volume_linear(0,0.5)
 	load_game()
 	print(Vector2(1,1) < Vector2(0,0))
 	print(Vector2(1,1) > Vector2(0,0))
 	print(Vector2(1,2.25) == Vector2(1.5,1.5))
 	reset()
-	if(no_data):
-		high_score = 5000
-
+		
 func _process(delta: float) -> void:
 	if(current_exp >= level_req):
 			level += 1
@@ -124,8 +132,8 @@ func bulletSizeIncrease() -> void:
 
 func bulletDamageIncrease() -> void:
 	if(playerBulletDamage < 150):
-		playerBulletDamage += playerBulletDamageNext
-		playerBulletDamageNext += 5
+		playerBulletDamage += playerBulletLevel * 5
+		playerBulletLevel += 1
 
 func bulletCountIncrease() -> void:
 	if(playerBulletCount < 10):
@@ -142,7 +150,7 @@ func toggleDashAttack() -> void:
 	playerDashAttack = !playerDashAttack
 
 func toggleAutoFire() -> void:
-	autofire = !autofire
+	autofire += 1
 
 func debugUpgrade():
 	if(Input.is_action_just_pressed("Debug Increase Bullet Speed")):

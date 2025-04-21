@@ -120,6 +120,8 @@ func newCoords(corner: int) -> Vector3:
 					coords.y = randf_range(0.75 * Globals.screenRes.y,Globals.screenRes.y)
 		coords.z = rad_to_deg(($Locations.get_child(corner)).get_angle_to($Center.position)) + randi_range(-30,30)
 		print("Corner: " + str(cardinal(corner)) + str(coords))
+		#coords.x -= (Vector2(coords.x,coords.y).direction_to($Center.global_position) * 100).x	
+		#coords.y -= (Vector2(coords.x,coords.y).direction_to($Center.global_position) * 100).y	
 		return coords
 
 func pickEnemy() -> Resource:

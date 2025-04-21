@@ -7,8 +7,6 @@ func _ready() -> void:
 func _on_volume_value_changed(value: float):
 	AudioServer.set_bus_volume_linear(0,value)
 
-
-
 func _on_mute_toggled(toggled_on: bool) -> void:
 	AudioServer.set_bus_mute(0,toggled_on)
 
@@ -27,4 +25,7 @@ func _on_resolutions_item_selected(index: int) -> void:
 
 
 func _on_return_button_pressed() -> void:
+	#Globals.volume = $MarginContainer/VBoxContainer/Volume.value
+	#Globals.mute = $MarginContainer/VBoxContainer/Mute.toggle_mode
+	#Globals.resolution = $MarginContainer/VBoxContainer/Mute.selected
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dj4vw527rb4eg"]
 
 [ext_resource type="Script" uid="uid://xgmka2ewusth" path="res://entities/boulder.gd" id="1_dgbyp"]
-[ext_resource type="Texture2D" uid="uid://tlcwnk6g15a6" path="res://images/asteroid.bmp" id="2_dicgi"]
+[ext_resource type="Texture2D" uid="uid://clg3oq0etnbj5" path="res://images/AsteroidV2.png" id="2_hetye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xs80f"]
 radius = 7.0
@@ -16,10 +16,10 @@ motion_mode = 1
 script = ExtResource("1_dgbyp")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_dicgi")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_hetye")
 
 [node name="CollisionArea" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_xs80f")
 disabled = true
 
@@ -28,7 +28,6 @@ position = Vector2(0, 4.17233e-07)
 scale = Vector2(2, 2)
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 16
 

@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxywb6jmnc3ny"]
+[gd_scene load_steps=4 format=3 uid="uid://bxywb6jmnc3ny"]
 
 [ext_resource type="PackedScene" uid="uid://dj4vw527rb4eg" path="res://entities/boulder.tscn" id="1_y66ui"]
 [ext_resource type="Script" uid="uid://dfjf3ieoy7shv" path="res://entities/golden.gd" id="2_wx3nd"]
+[ext_resource type="Texture2D" uid="uid://cu62tn7xlooi6" path="res://images/Gold Asteroid.png" id="3_tchin"]
 
 [node name="Golden" instance=ExtResource("1_y66ui")]
-modulate = Color(1, 1, 0, 1)
 script = ExtResource("2_wx3nd")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_tchin")
