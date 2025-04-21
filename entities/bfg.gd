@@ -1,7 +1,7 @@
 extends "res://entities/boulder.gd"
 
 func _ready() -> void:
-	exp_value = 100
+	exp_value = 0
 	health = 500
 	scale *= 40
 	#scale *= Vector2($Health.health,$Health.health)
@@ -12,7 +12,10 @@ func _ready() -> void:
 	
 
 func remove(_normal_enemy: bool = false):
-	super.remove()
+	can_move = false
+	Globals.gainPoints(points)
+	Globals.gainExp(exp_value,true)
+	Globals.enemy_kills += 1
 	queue_free()
 
 

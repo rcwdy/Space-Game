@@ -1,0 +1,7 @@
+10, 15, 25, 40, 60, 85, 115, 150
+Base Damage: 60
+
+Damage = Damage * (0.6 ^ Bullet Count Level)
+If base damage = 60, bullet count level = 1
+60 * 0.75 = 30 per shot. 90 damage in total
+60 * 0.6 = 15 per shot. 7

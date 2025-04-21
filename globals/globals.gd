@@ -86,10 +86,14 @@ func _ready() -> void:
 		high_score = 5000
 
 func _process(delta: float) -> void:
+	if(current_exp >= level_req):
+			level += 1
+			max_enemies = 4 + (level / 2)
+			level_req = (int)(level_req * 1.5)
+	if Input.is_key_pressed(KEY_K):
+		get_tree().call_group("Enemy","queue_free")
 	debugUpgrade()
 
-
-# When player gets hit they lose health
 func loseHealth(damage_dealt: int) -> void:
 	player_health -= damage_dealt
 
@@ -100,15 +104,14 @@ func gainPoints(points_earned: int) -> void:
 	print("Current Score: " + str(player_score))
 	print("High Score: " + str(high_score))
 
-func gainExp(exp: int) -> void:
-	current_exp += exp
-	if(current_exp >= level_req):
-		level += 1
-		max_enemies = 4 + (level / 2)
-		level_req = (int)(level_req * 1.5)
+func gainExp(exp_gained: int, bfg: bool = false) -> void:
+	if(bfg):
+		current_exp = level_req
+	else:
+		current_exp += exp_gained * (1 + (Globals.level - 1) / 10)
 
 func debugExp() -> void:
-	gainExp(level_req)
+	gainExp(0,true)
 
 func bulletSpeedIncrease() -> void:
 	if(playerBulletSpeedMulti < 3):

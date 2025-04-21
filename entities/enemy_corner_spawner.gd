@@ -14,16 +14,14 @@ enum{
 	NORTHWEST, NORTH, NORTHEAST,WEST,EAST,SOUTHWEST,SOUTH,SOUTHEAST
 }
 
-enum{
-	NORMAL = 10, SPLIT = 11
-}
-
+# On startup, checks if parent is valid
 func _ready() ->void:
 	var parent = get_parent()
 	if(("time" in parent && parent.has_node("Player"))):
 		can_produce = true
 
 func _process(_delta: float) -> void:
+	# If BFG is on-screen stop spawning of enemies
 	if has_node("Enemies/BFG"):
 		can_produce = false
 	else:
@@ -71,6 +69,8 @@ func spawn(corner: int, override: bool = false) -> void:
 			# Base Speed * Speed Multiplier By Level + 10-Level Loop Speed Increase
 			
 			boulder.speed = randf_range(0.5,0.7) * (Spawns.data["level"+str(Globals.level % 10 + 1)].get("enemy_speed")) + (0.6 * ((Globals.level - 1) / 10))
+			boulder.add_to_group("Enemy")
+		
 			$Enemies.add_child(boulder,true)
 
 func newCoords(corner: int) -> Vector3:
@@ -144,6 +144,11 @@ func enemyStringToResource(name: String) -> Resource:
 	elif(name == "homing"):
 		return homing_make
 	elif(name == "bfg"):
+		get_tree().call_group("Enemy","queue_free")
 		return bfg_make
 	else:
 		return boulder_make
+
+func scripted_kill():
+	print(self, "was killed by some Force")
+	queue_free()
