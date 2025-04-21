@@ -13,12 +13,14 @@ func pause():
 	#$PanelContainer/VBoxContainer/ResumeButton.set_disabled(false)
 	get_tree().set_group("Pause Buttons","disabled",false)
 	$AnimationPlayer.play("blur")
+	
 
 func testEsc():
 	if Input.is_action_just_pressed("Escape") and get_tree().paused == false:
 		pause()
 	elif Input.is_action_just_pressed("Escape") and get_tree().paused == true:
 		resume()
+
 
 func _on_resume_button_pressed() -> void:
 	resume()
