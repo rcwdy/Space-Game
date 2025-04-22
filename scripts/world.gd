@@ -32,8 +32,11 @@ var upgrades: Array[Dictionary] = [
 	{"id": "bullet_speed", "icon": preload("res://images/BulletSpeed.png"), "max_uses": 20},
 	{"id": "bigger_projectile", "icon": preload("res://images/BiggerProjectile.png"), "max_uses": 5},
 	{"id": "spread_shot", "icon": preload("res://images/SpreadShot.png"), "max_uses": 5},
-	{"id": "stronger_bullets", "icon": preload("res://images/StrongerBullets.png"), "max_uses": 10},
-	{"id": "rocket_launcher", "icon": preload("res://images/RocketLauncher.png"), "max_uses": 1},
+	{"id": "stronger_bullets", "icon": preload("res://images/StrongerBullets.png"), "max_uses": 8},
+	#{"id": "rocket_launcher", "icon": preload("res://images/RocketLauncher.png"), "max_uses": 1},
+	{"id": "ramming_power", "icon": preload("res://images/RammingPower.png"), "max_uses": 1},
+	{"id": "auto_fire", "icon": preload("res://images/AutoFire.png"), "max_uses": 1},
+	#{"id": "health_increase", "icon": preload("res://images/HealthIncrease.png"), "max_uses": 1},
 ]
 
 var upgrade_counts := {} 
@@ -50,3 +53,19 @@ func _on_upgrade_chosen(upgrade_id: String):
 	if upgrade_id == "bullet_speed":
 		Globals.bulletSpeedIncrease()
 		print(Globals.playerBulletSpeedMulti)
+	if upgrade_id == "bigger_projectile":
+		Globals.bulletSizeIncrease()
+		print(Globals.playerBulletSize)
+	if upgrade_id == "spread_shot":
+		Globals.bulletCountIncrease()
+		print(Globals.playerBulletCount)
+	if upgrade_id == "stronger_bullets":
+		Globals.bulletDamageIncrease()
+		print(Globals.playerBulletDamage)
+	if upgrade_id == "ramming_power":
+		Globals.toggleDashAttack()
+	if upgrade_id == "auto_fire":
+		Globals.toggleAutoFire()
+	#if upgrade_id == "health_increase":
+		
+	
