@@ -12,6 +12,7 @@ var health: int
 @onready var tween = create_tween()
 
 func _ready() -> void:
+	#add_to_group("Enemy")
 	exp_value = 1
 	points = 200
 	health = 25
@@ -47,10 +48,6 @@ func _on_hitbox_area_entered(_area: Area2D) -> void:
 	health -= Globals.playerBulletDamage
 	print("Health Remaining: " + str(health))
 
-#func dead(external_kill: bool = false):
-	#if(health <= 0):
-	#	kill()
-		
 func remove(normal_enemy: bool = true):
 	can_move = false
 	Globals.gainPoints(points)

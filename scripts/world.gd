@@ -10,15 +10,19 @@ func CheckAlive():
 func _process(_delta: float) -> void:
 	$"Health".text = "Health:" +str(Globals.player_health)
 	time += _delta
-	$"Playtime".text = str(int(time))
+	$"Playtime".text = Time.get_time_string_from_system()
 	$"Score".text = "Score:" + str(Globals.player_score)
-	
-	if(Input.is_action_just_pressed("Increase 60 seconds")):
-		time += 60
+	$EXPBar.value = Globals.current_exp
 	CheckAlive()
 	
+	if $EXPBar.value >= $EXPBar.max_value:
+		updateBar()
+	
+
+
+func updateBar():
 	$EXPBar.max_value = Globals.level_req
-	$EXPBar.value = Globals.current_exp
+	$EXPBar.min_value = $EXPBar.value
 	$EXPBar/Level.set_text("Level: " + str(Globals.level))
 	$EXPBar/Goal.set_text(str(int($EXPBar.max_value)))
 	if level < Globals.level:
@@ -32,13 +36,15 @@ var upgrades: Array[Dictionary] = [
 	{"id": "bullet_speed", "icon": preload("res://images/BulletSpeed.png"), "max_uses": 20},
 	{"id": "bigger_projectile", "icon": preload("res://images/BiggerProjectile.png"), "max_uses": 5},
 	{"id": "spread_shot", "icon": preload("res://images/SpreadShot.png"), "max_uses": 5},
-	{"id": "stronger_bullets", "icon": preload("res://images/StrongerBullets.png"), "max_uses": 10},
+	{"id": "stronger_bullets", "icon": preload("res://images/StrongerBullets.png"), "max_uses": 8},
 	{"id": "rocket_launcher", "icon": preload("res://images/RocketLauncher.png"), "max_uses": 1},
 ]
 
 var upgrade_counts := {} 
 
 func _ready():
+	Globals.reset()
+	updateBar()
 	canvas_layer.add_child(upgrade_menu)
 	add_child(canvas_layer)
 
@@ -50,3 +56,14 @@ func _on_upgrade_chosen(upgrade_id: String):
 	if upgrade_id == "bullet_speed":
 		Globals.bulletSpeedIncrease()
 		print(Globals.playerBulletSpeedMulti)
+	elif upgrade_id == "bigger_projectile":
+		Globals.bulletSizeIncrease()
+		print(Globals.playerBulletSize)
+	elif upgrade_id == "spread_shot":
+		Globals.bulletCountIncrease()
+		print(Globals.playerBulletCount)
+	elif upgrade_id == "stronger_bullets":
+		Globals.bulletDamageIncrease()
+		print(Globals.playerBulletLevel)
+	else:
+		print("Upgrade not Implemented!")

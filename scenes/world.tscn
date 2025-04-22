@@ -20,7 +20,7 @@ texture = ExtResource("2_71j4m")
 [node name="Player" parent="." instance=ExtResource("3_i7141")]
 position = Vector2(320, 384)
 
-[node name="Corner Spawner" parent="." instance=ExtResource("4_k0juu")]
+[node name="Spawner" parent="." instance=ExtResource("4_k0juu")]
 
 [node name="Playtime" type="Label" parent="."]
 offset_right = 639.0
@@ -39,15 +39,9 @@ offset_right = 127.0
 offset_bottom = 23.0
 text = "Health Counter: "
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseOverlay" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Pause" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
+[node name="Pause" parent="PauseOverlay" instance=ExtResource("5_71j4m")]
 offset_left = 3.0
 offset_right = 3.0
 

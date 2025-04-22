@@ -7,5 +7,5 @@ func play_song(song: AudioStream):
 		self.set_stream(song)
 		self.play(0)
 
-func _on_finished() -> void:
-	self.play(0)
+func play_sound(sound: AudioStream):
+	print("Sound!")
