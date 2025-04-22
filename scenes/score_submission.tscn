@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7rn8ej2c26wd"]
+[gd_scene load_steps=5 format=3 uid="uid://6c6bsappqdnp"]
 
 [ext_resource type="Script" uid="uid://dljlqxyr5mj8f" path="res://scripts/score_submission.gd" id="1_r1bva"]
 
@@ -80,6 +80,8 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="HttpRequest" type="HTTPRequest" parent="."]
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -88,10 +90,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.5
-offset_top = -100.0
-offset_right = 78.5
-offset_bottom = 100.0
+offset_left = -83.0
+offset_top = -56.0
+offset_right = 83.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -113,7 +115,7 @@ text = "Score: "
 layout_mode = 2
 placeholder_text = "Input Initials Here"
 alignment = 1
-max_length = 3
+max_length = 5
 keep_editing_on_text_submit = true
 emoji_menu_enabled = false
 

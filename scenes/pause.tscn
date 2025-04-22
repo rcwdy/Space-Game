@@ -211,22 +211,22 @@ grow_horizontal = 2
 layout_mode = 2
 alignment = 1
 
-[node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer" groups=["Pause Buttons"]]
 layout_mode = 2
 disabled = true
 text = "Resume"
 
-[node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer" groups=["Pause Buttons"]]
 layout_mode = 2
 disabled = true
 text = "Restart"
 
-[node name="ReturnButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="ReturnButton" type="Button" parent="PanelContainer/VBoxContainer" groups=["Pause Buttons"]]
 layout_mode = 2
 disabled = true
 text = "Return to Menu"
 
-[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer" groups=["Pause Buttons"]]
 layout_mode = 2
 disabled = true
 text = "Quit"
