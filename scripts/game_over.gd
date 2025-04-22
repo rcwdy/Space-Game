@@ -1,5 +1,7 @@
 extends Control
 
+
+
 func _on_quit_button_pressed() -> void:
 	Globals.save_game()
 	get_tree().quit()
