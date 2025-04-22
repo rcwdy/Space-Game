@@ -8,7 +8,7 @@ func _ready():
 	fetch_scores()
 
 func fetch_scores():
-	var url = "http://localhost:3000/high-scores"
+	var url = "https://rocket-rampage.onrender.com/high-scores"
 	var headers = []
 	http_request.request(url, headers, HTTPClient.METHOD_GET)
 

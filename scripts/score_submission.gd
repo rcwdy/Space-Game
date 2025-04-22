@@ -18,7 +18,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	send_score(name, Globals.player_score)
 
 func send_score(player_name: String, player_score: int) -> void:
-	var url = "http://localhost:3000/submit-score"
+	var url = "https://rocket-rampage.onrender.com/submit-score"
 	var headers = ["Content-Type: application/json"]
 	var body = {
 		"player": player_name,
