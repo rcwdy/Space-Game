@@ -20,3 +20,7 @@ func _process(_delta: float) -> void:
 
 func _on_leaderboard_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/leaderboard.tscn")
+
+
+func _on_tutorial_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/tutorial_1.tscn")

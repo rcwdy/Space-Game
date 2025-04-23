@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5xfr5vtofne2"]
+
+[ext_resource type="Script" uid="uid://c3ujie48g6105" path="res://tutorial_2.gd" id="1_k0cqu"]
+[ext_resource type="Texture2D" uid="uid://b7md33ii4tqb0" path="res://images/Tutorial Screens/2.png" id="2_442fl"]
+
+[node name="Tutorial2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k0cqu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_442fl")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 23.0
+grow_vertical = 0
+text = "<-"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "->"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
