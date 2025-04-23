@@ -8,6 +8,7 @@ enum{
 var debug_upgrade_num = 0
 
 var player_health = 100
+var player_health_max = player_health
 var player_score = 0
 var high_score
 var enemy_kills = 0
@@ -79,14 +80,6 @@ func reset() -> void:
 	
 func _ready() -> void:
 	#Testing
-	var num = 10
-	var num2 = 1
-	for i in range(101):
-		prints(i, num, num / num2)
-		num = int(num * 1.5)
-		
-			
-	
 	AudioServer.set_bus_volume_linear(0,0.5)
 	load_game()
 	print(Vector2(1,1) < Vector2(0,0))
@@ -104,6 +97,8 @@ func _process(delta: float) -> void:
 	debugUpgrade()
 
 func loseHealth(damage_dealt: int) -> void:
+	if(damage_dealt > 25):
+		damage_dealt = 25
 	player_health -= damage_dealt
 
 func gainPoints(points_earned: int) -> void:

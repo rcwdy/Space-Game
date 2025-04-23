@@ -7,7 +7,9 @@ func _ready() -> void:
 	exp_value = 5
 	health = 20
 	scale *= 2
-	#scale *= Vector2($Health.health,$Health.health)
+	points = 500
+	scaleStats()
+	
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color.MEDIUM_SPRING_GREEN, 0.5)
 

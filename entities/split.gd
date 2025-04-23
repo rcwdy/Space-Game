@@ -5,9 +5,11 @@ var boulder_make = preload("res://entities/boulder.tscn")
 func _ready() -> void:
 	exp_value = 2
 	health = 40
-	points = 400
+	points = 300
 	scale *= 3
-	#scale = Vector2($Health.health,$Health.health)
+	
+	scaleStats()
+	
 	modulate.a = 0
 	tween.tween_property(self, "modulate", Color.SKY_BLUE, 0.5)
 

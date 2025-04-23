@@ -21,6 +21,7 @@ func open(upgrades: Array[Dictionary], use_counts: Dictionary):
 	upgrade_use_counts = use_counts
 	
 	current_choices = _pick_random_upgrades(3)
+	## Game crashed when duplicate upgrade is loaded
 	for i in range(buttons.size()):
 		buttons[i].texture_normal = current_choices[i]["icon"]
 
