@@ -16,6 +16,7 @@ func _ready() -> void:
 	exp_value = 1
 	points = 200
 	health = 25
+	scaleStats()
 	
 	scale *= 2
 	#scale *= Vector2($Health.health,$Health.health)
@@ -45,7 +46,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 		queue_free()
 
 func _on_hitbox_area_entered(_area: Area2D) -> void:
-	health -= Globals.playerBulletDamage
+	var damage_taken = (Globals.playerBulletDamage / (Globals.playerBulletCount + 1) + (Globals.playerBulletCount / 2))
+	prints("Damage Taken", damage_taken)
+	health -= damage_taken
 	print("Health Remaining: " + str(health))
 
 func remove(normal_enemy: bool = true):
@@ -55,3 +58,8 @@ func remove(normal_enemy: bool = true):
 	Globals.enemy_kills += 1
 	if(normal_enemy):
 		queue_free()
+
+func scaleStats():
+	health *= pow(1.5,(Globals.level - 1) / 10)
+	exp_value *= pow(1 + (Globals.level - 1) / 10,3)
+	print("Name:", self, "Health:", health, "Exp:", exp_value)

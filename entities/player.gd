@@ -52,7 +52,6 @@ func _process(_delta: float) -> void:
 	updateParticles()
 	
 	rotation_degrees = degree
-	degree = rotation_degrees
 	$ShootCD.wait_time = Globals.playerShootSpeed
 
 

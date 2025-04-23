@@ -5,9 +5,11 @@ func _ready() -> void:
 	exp_value = 3
 	health = 15
 	scale *= 2
-	#scale *= Vector2($Health.health,$Health.health)
+	points = 400
+	scaleStats()
+
 	modulate.a = 0
-	tween.tween_property(self, "modulate", Color.CRIMSON, 0.5)
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
 
 	speed *= 1.5
 	$CollisionArea.disabled = false

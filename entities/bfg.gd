@@ -2,11 +2,14 @@ extends "res://entities/boulder.gd"
 
 func _ready() -> void:
 	exp_value = 0
+	points = 3000
 	health = 500
+	scaleStats()
+	
 	scale *= 40
 	#scale *= Vector2($Health.health,$Health.health)
 	modulate.a = 0
-	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.5)
+	tween.tween_property(self, "modulate", Color(1,1,1,1), 2.5)
 
 	speed *= 0.2
 	

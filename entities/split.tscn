@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dqorpo48h73j" path="res://images/SplittingAsteroid.png" id="3_e88di"]
 
 [node name="Split" instance=ExtResource("1_vchb0")]
-modulate = Color(0.372549, 0.372549, 1, 1)
 script = ExtResource("2_aspq5")
 
 [node name="Sprite" parent="." index="0"]

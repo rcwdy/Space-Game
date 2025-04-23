@@ -134,18 +134,18 @@ func pickEnemy() -> Resource:
 			return enemyStringToResource(i)
 	return boulder_make
 
-func enemyStringToResource(name: String) -> Resource:
-	if(name == "boulder"):
+func enemyStringToResource(pick: String) -> Resource:
+	if(pick == "boulder"):
 		return boulder_make
-	elif(name == "split"):
+	elif(pick == "split"):
 		return split_make
-	elif(name == "martyrdom"):
+	elif(pick == "martyrdom"):
 		return marty_make
-	elif(name == "golden"):
+	elif(pick == "golden"):
 		return gold_make
-	elif(name == "homing"):
+	elif(pick == "homing"):
 		return homing_make
-	elif(name == "bfg"):
+	elif(pick == "bfg"):
 		get_tree().call_group("Enemy","queue_free")
 		return bfg_make
 	else:

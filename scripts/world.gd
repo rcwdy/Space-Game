@@ -10,7 +10,7 @@ func CheckAlive():
 func _process(_delta: float) -> void:
 	$"Health".text = "Health:" +str(Globals.player_health)
 	time += _delta
-	$"Playtime".text = Time.get_time_string_from_system()
+	$"Playtime".text = str(int(time))
 	$"Score".text = "Score:" + str(Globals.player_score)
 	$EXPBar.value = Globals.current_exp
 	CheckAlive()
