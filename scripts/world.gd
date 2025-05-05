@@ -30,9 +30,12 @@ func updateBar():
 		upgrade_menu.open(upgrades, upgrade_counts)
 	level = Globals.level
 
+# Loads the upgrade menu
 @onready var upgrade_menu := preload("res://scenes/upgrade_menu.tscn").instantiate()
+# Makes a canvas layer for the menu
 @onready var canvas_layer := CanvasLayer.new()
 
+# Gives all the upgrades IDs, icons, and usage limits
 var upgrades: Array[Dictionary] = [
 	{"id": "bullet_speed", "icon": preload("res://images/BulletSpeed.png"), "max_uses": 20},
 	{"id": "bigger_projectile", "icon": preload("res://images/BiggerProjectile.png"), "max_uses": 5},
@@ -41,8 +44,10 @@ var upgrades: Array[Dictionary] = [
 	{"id": "rocket_launcher", "icon": preload("res://images/RocketLauncher.png"), "max_uses": 1},
 ]
 
+# Tracks how many times an upgrade has been used
 var upgrade_counts := {} 
 
+# Resets global values, adds the upgrade menu to the UI
 func _ready():
 	Globals.reset()
 	updateBar()
@@ -51,7 +56,7 @@ func _ready():
 
 	upgrade_menu.upgrade_selected.connect(_on_upgrade_chosen)
 
-
+# Applies the upgrades when they are chosen
 func _on_upgrade_chosen(upgrade_id: String):
 	print("Chosen upgrade:", upgrade_id)
 	if upgrade_id == "bullet_speed":
