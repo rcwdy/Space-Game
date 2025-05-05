@@ -1,5 +1,6 @@
 extends "res://entities/boulder.gd"
 
+# Big Asteroid
 func _ready() -> void:
 	exp_value = 0
 	points = 3000
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 	speed *= 0.2
 	
-
+# Procs Auto Levelup On Kill
 func remove(_normal_enemy: bool = false):
 	can_move = false
 	Globals.gainPoints(points)

@@ -10,14 +10,17 @@ func _process(_delta: float) -> void:
 	if(Globals.playerBulletHoming):
 		_homing()
 
+# If bullet goes offscreen, bullet is removed
 func _on_on_screen_state_screen_exited() -> void:
 	print("bullet gone")
 	queue_free()
 
+# If bullet hits an enemy, bullet is removed
 func _on_area_entered(area: Area2D) -> void:
 	if(area.collision_layer == "0000010".bin_to_int()):
 		queue_free()
 
+# Homing properties for bullets
 func _homing() -> void:
 	var temp = $"Homing Area".get_overlapping_areas()
 	if(!temp.is_empty()):

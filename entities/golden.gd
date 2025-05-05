@@ -16,9 +16,8 @@ func _ready() -> void:
 	$CollisionArea.disabled = false
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	## Make boulders have an animation for respawning
 	var superparent = get_parent().get_parent()
-	# Golden only has a chance to survive after offscreening
+	# Golden only has a 50% chance to survive after offscreening
 	var survive = randi() % 2
 	if(survive && superparent != null && superparent.has_node("Locations") && ("newCoords" in superparent)):
 		pass

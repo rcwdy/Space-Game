@@ -2,11 +2,12 @@ extends Node2D
 
 # Child of world, spawns boulders
 
-var boulder = preload("res://entities/boulder.tscn")
+var boulder = preload("res://entities/boulder.tscn") # Pre
 
 func _ready() -> void:
 	pass
 	
+
 func _process(delta: float) -> void:
 	#print($Spawntimer.time_left)
 	if(get_child_count() >= 16):

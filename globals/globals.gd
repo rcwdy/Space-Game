@@ -43,19 +43,22 @@ var max_enemies = 4
 #var mute = false
 #var resolution = 0
 
+# Saves High Score
 func save_game():
 	var save = FileAccess.open("user://high_score.sav", FileAccess.WRITE)
 	save.store_string(str(high_score))
 	save.close()
 
+# Loads High Score
 func load_game():
 	var save = FileAccess.open("user://high_score.sav", FileAccess.READ)
 	if(save != null):
 		high_score = save.get_line().to_int()
 		return
-	else:
+	else: # Runs if no high score is found
 		high_score = 5000
-# When no data is detected 
+
+# Resets all global variables when starting a new game
 func reset() -> void:
 	player_health = 100
 	player_score = 0
@@ -79,21 +82,19 @@ func reset() -> void:
 	max_enemies = 4
 	
 func _ready() -> void:
-	#Testing
-	AudioServer.set_bus_volume_linear(0,0.5)
-	load_game()
-	print(Vector2(1,1) < Vector2(0,0))
-	print(Vector2(1,1) > Vector2(0,0))
-	print(Vector2(1,2.25) == Vector2(1.5,1.5))
-	reset()
+	# Sets Audio to Default Volume
+	AudioServer.set_bus_volume_linear(0,0.5) # Sets Audio to Default Volume
+	load_game() # Loads High Score
+	reset() # Reset Global Variables
 		
 func _process(delta: float) -> void:
 	if(current_exp >= level_req):
-			level += 1
-			max_enemies = 4 + (level / 2)
-			level_req = (int)(level_req * 1.5)
-	if Input.is_key_pressed(KEY_K):
-		get_tree().call_group("Enemy","queue_free")
+		# Level Up Code
+		level += 1
+		max_enemies = 4 + (level / 2)
+		level_req = (int)(level_req * 1.5)
+	#if Input.is_key_pressed(KEY_K):
+		#get_tree().call_group("Enemy","queue_free")
 	debugUpgrade()
 
 func loseHealth(damage_dealt: int) -> void:

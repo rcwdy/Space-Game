@@ -46,10 +46,10 @@ func _process(_delta: float) -> void:
 		print($DashAttackCD.time_left)
 	
 	move_and_slide()
-	updateMoveSpeed()
-	updateTurnSpeed()
-	updatePlayerAction()
-	updateParticles()
+	updateMoveSpeed() # Up and Down Movement
+	updateTurnSpeed() # Left and Right Turning
+	updatePlayerAction() # Other Actions such as Shooting
+	updateParticles() # Updates related to Max Speed Particles
 	
 	rotation_degrees = degree
 	$ShootCD.wait_time = Globals.playerShootSpeed

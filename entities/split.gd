@@ -1,7 +1,6 @@
 extends "res://entities/boulder.gd"
 var boulder_make = preload("res://entities/boulder.tscn")
 
-
 func _ready() -> void:
 	exp_value = 2
 	health = 40
@@ -18,6 +17,7 @@ func _ready() -> void:
 
 func remove(_normal_enemy: bool = false):
 	super.remove()
+	# Splits enemy into multiple boulders. Dependent on Level
 	var spawn_count = 2 + (level / 10)
 	for i in range(spawn_count):
 		var boulder = boulder_make.instantiate()

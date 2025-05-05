@@ -28,6 +28,7 @@ func _process(_delta: float) -> void:
 		can_produce = true
 
 func _on_spawn_timer_timeout() -> void:
+	# When timer is over, timer resets itself and runs spawning code
 	if(can_produce):
 		$SpawnTimer.set_wait_time(1.25 * (pow(1.1,1 - Globals.level)))
 		direction = randi_range(0,$Locations.get_child_count() - 1)
@@ -36,6 +37,7 @@ func _on_spawn_timer_timeout() -> void:
 		spawn(direction)
 
 func cardinal(value: int) -> String:
+	# Correlates Integers (0-7) to a Direction
 	match(value):
 		NORTHWEST:
 			return 'NORTHWEST'
@@ -58,6 +60,7 @@ func cardinal(value: int) -> String:
 func spawn(corner: int, override: bool = false) -> void:
 	if(can_produce):
 		if(override || $Enemies.get_child_count() < Globals.max_enemies):
+			# Picks an enemy to spawn in, which side of the corner it will spawn in and assigns attributes to the enemy.
 			var boulder = pickEnemy().instantiate()
 			var side = randi_range(0,1)
 			print("Side" + str(side))
@@ -74,6 +77,7 @@ func spawn(corner: int, override: bool = false) -> void:
 			$Enemies.add_child(boulder,true)
 
 func newCoords(corner: int) -> Vector3:
+	# Used for relocation or new coordinates for an enemy
 		var coords: Vector3
 		var side = randi_range(0,1)
 		
@@ -125,6 +129,7 @@ func newCoords(corner: int) -> Vector3:
 		return coords
 
 func pickEnemy() -> Resource:
+	# Picks an enemy to spawn based on the spawntable and current level
 	var lvl = Globals.level
 	var num = randi_range(0,99)
 	var table = Spawns.data["level" + str((lvl - 1) % 10 + 1)]["enemies"]

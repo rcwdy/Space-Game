@@ -15,6 +15,7 @@ func _ready() -> void:
 	$CollisionArea.disabled = false
 
 func remove(_normal_enemy: bool = false):
+	# Removes and splits into multiple bullets on dying
 	super.remove()
 	for i in range(4):
 		var bullet = bullet_make.instantiate()

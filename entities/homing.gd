@@ -16,6 +16,7 @@ func _ready() -> void:
 	$CollisionArea.disabled = false
 
 func _process(_delta: float) -> void:
+	# Followed Path is determined by homing behaviour
 	super._process(_delta)
 	enemyDetected = !$DetectionArea.get_overlapping_areas().is_empty()
 	if(enemyDetected):
